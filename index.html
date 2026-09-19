@@ -3,157 +3,245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checklist Ambulância - Curral de Cima</title>
+<title>Checklist Ambulância Tipo A</title>
 
 <style>
 *{box-sizing:border-box}
+
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f1f5f9;
-  color:#172033;
+    margin:0;
+    padding:12px;
+    background:#f2f4f5;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#222
 }
+
 .container{
-  max-width:900px;
-  margin:auto;
-  padding:15px;
-}
-.header{
-  background:#075985;
-  color:white;
-  border-radius:12px;
-  padding:20px;
-  text-align:center;
-}
-.header h1{font-size:20px;margin:5px 0}
-.header h2{font-size:16px;margin:5px 0}
-.header p{margin:8px 0 0;font-size:13px}
-
-.card{
-  background:white;
-  margin-top:15px;
-  padding:15px;
-  border-radius:12px;
-  box-shadow:0 2px 8px #0002;
+    max-width:900px;
+    margin:auto;
+    background:#fff;
+    padding:18px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,.12)
 }
 
-input{
-  width:100%;
-  padding:12px;
-  border:1px solid #bbb;
-  border-radius:8px;
-  font-size:16px;
-  margin-top:5px;
+.cabecalho{
+    text-align:center;
+    border-bottom:2px solid #222;
+    padding-bottom:15px;
+    margin-bottom:18px
 }
 
-.info{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+.brasao{
+    display:block;
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    margin:0 auto 8px
 }
 
-.summary{
-  display:flex;
-  justify-content:space-around;
-  text-align:center;
-  font-weight:bold;
-  margin-top:15px;
-}
-.summary div{
-  background:#e2e8f0;
-  padding:10px;
-  border-radius:8px;
-  flex:1;
-  margin:3px;
+.cabecalho h1{
+    font-size:20px;
+    margin:5px 0
 }
 
-button{
-  border:0;
-  border-radius:8px;
-  padding:10px 14px;
-  font-weight:bold;
-  cursor:pointer;
+.cabecalho h2{
+    font-size:16px;
+    margin:5px 0
 }
 
-.top-buttons{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:15px;
+.cabecalho h3{
+    font-size:18px;
+    margin:10px 0 5px
 }
-.btn-ok{background:#16a34a;color:white}
-.btn-clear{background:#64748b;color:white}
-.btn-print{background:#0f766e;color:white}
 
-.category{
-  margin-top:18px;
-  border:1px solid #cbd5e1;
-  border-radius:10px;
-  overflow:hidden;
+.data-hora{
+    font-size:14px;
+    margin-top:10px
 }
-.category-title{
-  background:#075985;
-  color:white;
-  padding:10px;
-  font-weight:bold;
+
+.bloco{
+    margin-bottom:20px
+}
+
+.bloco-titulo{
+    background:#e9ecef;
+    border-left:5px solid #333;
+    padding:10px;
+    font-weight:bold;
+    margin-bottom:10px
+}
+
+.linha{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:12px
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:5px
+}
+
+input,select,textarea{
+    width:100%;
+    padding:10px;
+    border:1px solid #aaa;
+    border-radius:6px;
+    font-size:15px;
+    background:#fff
+}
+
+textarea{
+    min-height:60px;
+    resize:vertical
 }
 
 .item{
-  padding:12px;
-  border-top:1px solid #e2e8f0;
-  background:white;
-}
-.item-name{
-  font-weight:bold;
-  margin-bottom:8px;
-}
-.options{
-  display:flex;
-  gap:8px;
-}
-.sim,.nao{
-  flex:1;
-  background:#e2e8f0;
-  color:#172033;
-}
-.sim.selected{
-  background:#16a34a;
-  color:white;
-}
-.nao.selected{
-  background:#dc2626;
-  color:white;
-}
-.options button:disabled{
-  opacity:.35;
-  cursor:not-allowed;
+    border:1px solid #ddd;
+    border-radius:7px;
+    padding:10px;
+    margin-bottom:8px;
+    background:#fff
 }
 
-.obs{
-  display:none;
-  margin-top:8px;
-}
-.obs.show{display:block}
-.obs textarea{
-  width:100%;
-  min-height:70px;
-  padding:8px;
-  border:1px solid #dc2626;
-  border-radius:8px;
-  resize:vertical;
+.item-conteudo{
+    display:flex;
+    align-items:center;
+    gap:10px
 }
 
-@media(max-width:600px){
-  .info{grid-template-columns:1fr}
-  .summary{font-size:13px}
+.item input[type="checkbox"]{
+    width:22px;
+    height:22px;
+    flex-shrink:0
+}
+
+.item-nome{
+    flex:1
+}
+
+.quantidade{
+    font-size:13px;
+    color:#555;
+    margin-top:3px
+}
+
+.pendente{
+    background:#fff8e1;
+    border:1px solid #e0c45c;
+    border-radius:7px;
+    padding:10px;
+    margin-bottom:10px
+}
+
+.pendente strong{
+    display:block;
+    margin-bottom:7px
+}
+
+.sem-pendencias{
+    background:#e8f5e9;
+    border:1px solid #81c784;
+    padding:12px;
+    border-radius:7px;
+    text-align:center;
+    font-weight:bold
+}
+
+.torpedo{
+    border:1px solid #ddd;
+    border-radius:7px;
+    padding:12px;
+    margin-bottom:10px
+}
+
+.botoes{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:25px
+}
+
+button{
+    flex:1;
+    min-width:200px;
+    padding:14px;
+    border:0;
+    border-radius:7px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer
+}
+
+.btn-pdf{
+    background:#198754;
+    color:white
+}
+
+.btn-whatsapp{
+    background:#25D366;
+    color:white
+}
+
+.btn-nova{
+    background:#6c757d;
+    color:white
+}
+
+.aviso{
+    background:#fff3cd;
+    border:1px solid #ffc107;
+    padding:12px;
+    border-radius:7px;
+    margin-top:15px;
+    font-size:14px
+}
+
+.rodape{
+    text-align:center;
+    margin-top:25px;
+    padding-top:15px;
+    border-top:1px solid #ccc;
+    font-size:13px
+}
+
+@media(max-width:650px){
+    body{padding:5px}
+    .container{padding:12px}
+    .linha{grid-template-columns:1fr}
+    .cabecalho h1{font-size:17px}
+    .cabecalho h2{font-size:15px}
+    .cabecalho h3{font-size:16px}
+    button{width:100%}
 }
 
 @media print{
-  .top-buttons,.options,.obs textarea{
-    display:none!important;
-  }
-  body{background:white}
-  .card,.category{box-shadow:none}
+    body{
+        background:white;
+        padding:0
+    }
+
+    .container{
+        box-shadow:none;
+        max-width:100%;
+        padding:0
+    }
+
+    .botoes,
+    .aviso{
+        display:none!important
+    }
+
+    .item{
+        break-inside:avoid
+    }
+
+    .bloco{
+        break-inside:avoid
+    }
 }
 </style>
 </head>
@@ -162,381 +250,710 @@ button{
 
 <div class="container">
 
-<div class="header">
-  <div style="font-size:35px">🏥</div>
-  <h1>PREFEITURA MUNICIPAL DE CURRAL DE CIMA</h1>
-  <h2>SECRETARIA MUNICIPAL DE SAÚDE</h2>
-  <p>CHECK LIST — AMBULÂNCIA TIPO A</p>
-  <p id="dataHora"></p>
-</div>
+<div class="cabecalho">
 
-<div class="card">
+    <!--
+    O arquivo do brasão deve ficar na mesma pasta do index.html
+    com o nome brasao.png
+    -->
 
-<div class="info">
-  <div>
-    <label><b>Placa da ambulância</b></label>
-    <input id="placa" placeholder="Digite a placa">
-  </div>
+    <img
+        src="brasao.png"
+        class="brasao"
+        alt="Brasão da Prefeitura Municipal de Curral de Cima"
+        onerror="this.style.display='none'"
+    >
 
-  <div>
-    <label><b>Responsável pela conferência</b></label>
-    <input id="responsavel" placeholder="Nome do responsável">
-  </div>
-</div>
+    <h1>PREFEITURA MUNICIPAL DE CURRAL DE CIMA</h1>
+    <h2>SECRETARIA MUNICIPAL DE SAÚDE</h2>
+    <h3>CHECK LIST — AMBULÂNCIA TIPO A</h3>
 
-<div class="top-buttons">
-  <button class="btn-ok" onclick="marcarTodos()">✓ Marcar todos SIM</button>
-  <button class="btn-clear" onclick="limpar()">Limpar checklist</button>
-  <button class="btn-print" onclick="imprimir()">🖨️ Salvar / Imprimir</button>
-</div>
-
-<div class="summary">
-  <div>Total<br><span id="total">0</span></div>
-  <div>SIM<br><span id="simCount">0</span></div>
-  <div>NÃO<br><span id="naoCount">0</span></div>
-</div>
-
-<div id="checklist"></div>
+    <div class="data-hora" id="dataHora"></div>
 
 </div>
+
+
+<!-- IDENTIFICAÇÃO -->
+
+<div class="bloco">
+
+<div class="bloco-titulo">
+IDENTIFICAÇÃO DA AMBULÂNCIA E PROFISSIONAL
 </div>
+
+<div class="linha">
+
+<div>
+<label for="placa">PLACA DA AMBULÂNCIA *</label>
+
+<select id="placa">
+<option value="">Selecione a placa</option>
+<option value="QFS2I41">QFS2I41</option>
+<option value="TOT3F49">TOT3F49</option>
+</select>
+</div>
+
+<div>
+<label for="data">DATA</label>
+<input type="text" id="data" readonly>
+</div>
+
+</div>
+
+<div class="bloco">
+
+<label for="nomeCompleto">NOME COMPLETO *</label>
+
+<input
+type="text"
+id="nomeCompleto"
+placeholder="Digite o nome completo"
+autocomplete="off"
+>
+
+</div>
+
+<div class="bloco">
+
+<label for="corenPB">NÚMERO DO COREN-PB *</label>
+
+<input
+type="text"
+id="corenPB"
+placeholder="Digite o número do COREN-PB"
+autocomplete="off"
+>
+
+</div>
+
+</div>
+
+
+<!-- VENTILAÇÃO -->
+
+<div class="bloco">
+
+<div class="bloco-titulo">
+1. VENTILAÇÃO E REANIMAÇÃO
+</div>
+
+<div id="categoria-ventilacao"></div>
+
+</div>
+
+
+<!-- FLUIDOTERAPIA -->
+
+<div class="bloco">
+
+<div class="bloco-titulo">
+2. FLUIDOTERAPIA E ACESSO VENOSO
+</div>
+
+<div id="categoria-fluidoterapia"></div>
+
+</div>
+
+
+<!-- OXIGENOTERAPIA -->
+
+<div class="bloco">
+
+<div class="bloco-titulo">
+3. OXIGENOTERAPIA E VIAS AÉREAS
+</div>
+
+<div id="categoria-oxigenoterapia"></div>
+
+</div>
+
+
+<!-- MONITORIZAÇÃO -->
+
+<div class="bloco">
+
+<div class="bloco-titulo">
+4. MONITORIZAÇÃO E AVALIAÇÃO
+</div>
+
+<div id="categoria-monitorizacao"></div>
+
+</div>
+
+
+<!-- TRAUMA -->
+
+<div class="bloco">
+
+<div class="bloco-titulo">
+5. TRAUMA E IMOBILIZAÇÃO
+</div>
+
+<div id="categoria-trauma"></div>
+
+</div>
+
+
+<!-- PARTO -->
+
+<div class="bloco">
+
+<div class="bloco-titulo">
+6. PARTO E CUIDADOS GERAIS
+</div>
+
+<div id="categoria-parto"></div>
+
+</div>
+
+
+<!-- PROTEÇÃO -->
+
+<div class="bloco">
+
+<div class="bloco-titulo">
+7. PROTEÇÃO E HIGIENE
+</div>
+
+<div id="categoria-protecao"></div>
+
+</div>
+
+
+<!-- CONTROLE DE TORPEDO -->
+
+<div class="bloco">
+
+<div class="bloco-titulo">
+8. CONTROLE DE TORPEDO
+</div>
+
+<div class="torpedo">
+
+<label for="arComprimido">
+AR COMPRIMIDO — LITROS
+</label>
+
+<input
+type="number"
+id="arComprimido"
+min="0"
+step="0.1"
+placeholder="Digite a quantidade de litros"
+>
+
+</div>
+
+<div class="torpedo">
+
+<label for="oxigenio">
+O₂ — OXIGÊNIO — LITROS
+</label>
+
+<input
+type="number"
+id="oxigenio"
+min="0"
+step="0.1"
+placeholder="Digite a quantidade de litros"
+>
+
+</div>
+
+<div class="torpedo">
+
+<label for="torpedoMovel">
+TORPEDO MÓVEL DE O₂ — LITROS
+</label>
+
+<input
+type="number"
+id="torpedoMovel"
+min="0"
+step="0.1"
+placeholder="Digite a quantidade de litros"
+>
+
+</div>
+
+</div>
+
+
+<!-- ITENS NÃO MARCADOS -->
+
+<div class="bloco">
+
+<div class="bloco-titulo">
+ITENS NÃO MARCADOS / OBSERVAÇÕES
+</div>
+
+<div id="pendencias"></div>
+
+</div>
+
+<div class="aviso">
+
+<strong>Importante:</strong>
+os itens que não receberem o X aparecerão automaticamente nesta área
+para registro da observação correspondente.
+
+</div>
+
+
+<!-- BOTÕES -->
+
+<div class="botoes">
+
+<button
+class="btn-pdf"
+onclick="baixarPDF()">
+📄 BAIXAR PDF
+</button>
+
+<button
+class="btn-whatsapp"
+onclick="compartilharWhatsApp()">
+📲 COMPARTILHAR NO WHATSAPP
+</button>
+
+<button
+class="btn-nova"
+onclick="novaChecagem()">
+🔄 NOVA CHECAGEM
+</button>
+
+</div>
+
+
+<div class="rodape">
+
+ENFERMEIRO(A) / COREN-PB:
+<span id="rodapeProfissional">
+______________________________
+</span>
+
+</div>
+
+</div>
+
 
 <script>
 
-const categorias = [
+const materiais=[
 
 {
-nome:"COMPARTIMENTO COM TELA 01",
+categoria:"categoria-ventilacao",
 itens:[
-"Ambu adulto — 01",
-"Ambu pediátrico — 01"
+["ambu-adulto","AMBU ADULTO","01"],
+["ambu-pediatrico","AMBU PEDIÁTRICO","01"],
+["mascara-reservatorio-adulta","MÁSCARA COM RESERVATÓRIO ADULTA","01"],
+["mascara-reservatorio-infantil","MÁSCARA COM RESERVATÓRIO INFANTIL","01"],
+["guedel","CÂNULA DE GUEDEL","01"]
 ]
 },
 
 {
-nome:"COMPARTIMENTO COM TELA 02",
+categoria:"categoria-fluidoterapia",
 itens:[
-"SF 0,9% 500 mL — 05",
-"Soro RL 500 mL — 05",
-"SG 5% 500 mL — 05",
-"Jelco 14, 16, 18, 20, 22 e 24 — 05 de cada",
-"Scalpe — 05",
-"Seringas 01, 03, 05, 10 e 20 mL — 05 de cada",
-"Equipo macrogotas — 10",
-"Lâmina de bisturi — 05"
+["sf500","SF 0,9% 500 ML","05"],
+["rl500","SORO RL 500 ML","05"],
+["sg500","SG 5% 500 ML","05"],
+["jelco","JELCO 14, 16, 18, 20, 22, 24","05 DE CADA"],
+["scalpe","SCALPE","05"],
+["seringas","SERINGAS 01, 03, 05, 10 E 20 ML","05"],
+["equipo","EQUIPO MACROGOTAS","10"]
 ]
 },
 
 {
-nome:"COMPARTIMENTO COM TELA 03",
+categoria:"categoria-oxigenoterapia",
 itens:[
-"Máscara com reservatório adulta — 01",
-"Máscara com reservatório infantil — 01",
-"Cânula de Guedel — 02",
-"Cateter nasal — 05",
-"Látex / extensão de O₂ — 03",
-"Máscara de nebulização — 01",
-"Máscara de Venturi — 01"
+["cateter-nasal","CATETER NASAL","01"],
+["latex-extensao","LÁTEX / EXTENSÃO PARA O₂","01"],
+["mascara-nebulizacao","MÁSCARA DE NEBULIZAÇÃO","01"],
+["mascara-venturi","MÁSCARA DE VENTURI","01"]
 ]
 },
 
 {
-nome:"MONITORIZAÇÃO E AVALIAÇÃO",
+categoria:"categoria-monitorizacao",
 itens:[
-"Oxímetro — 01",
-"Termômetro — 01",
-"Estetoscópio adulto — 01",
-"Estetoscópio infantil — 01",
-"Tensiômetro adulto — 01",
-"Tensiômetro infantil — 01"
+["oximetro","OXÍMETRO","01"],
+["termometro","TERMÔMETRO","01"],
+["esteto-adulto","ESTETOSCÓPIO E TENSIÔMETRO ADULTO","01"],
+["esteto-infantil","ESTETOSCÓPIO E TENSIÔMETRO INFANTIL","01"]
 ]
 },
 
 {
-nome:"MATERIAIS DE TRAUMA",
+categoria:"categoria-trauma",
 itens:[
-"Manta térmica — 02",
-"Protetor de queimados e evisceração — 01",
-"Gaze — 10",
-"Atadura — 10"
+["manta-termica","MANTA TÉRMICA","02"],
+["gaze","GAZE","10"],
+["atadura","ATADURA","10"],
+["colar-cervical","COLAR CERVICAL NEONATAL / INFANTIL / P / M / G REGULÁVEL","01 DE CADA"],
+["coxins","COXINS","01 PAR"],
+["ked","KED ADULTO","01"],
+["prancha","PRANCHA ADULTA COM B.E + TIRADENTES","01"],
+["garrote","GARROTE","02"]
 ]
 },
 
 {
-nome:"COMPARTIMENTO FECHADO SUPERIOR",
+categoria:"categoria-parto",
 itens:[
-"Colcha — 01",
-"Lençol descartável — 10",
-"Kit parto — 01",
-"Lençol — 02",
-"Fralda descartável — 01"
+["kit-parto","KIT PARTO","01"],
+["colcha","COLCHA","01"],
+["lencol-descartavel","LENÇOL DESCARTÁVEL","10"],
+["lencol","LENÇOL","02"],
+["fralda","FRALDA DESCARTÁVEL","01"]
 ]
 },
 
 {
-nome:"COMPARTIMENTO FECHADO INFERIOR 01",
+categoria:"categoria-protecao",
 itens:[
-"Colar cervical: neonatal, infantil, P, M e G, regulável — 01 de cada",
-"Coxins — 01 par",
-"Luva P, M e G — 01 de cada",
-"Máscara descartável — 01 cx",
-"Esparadrapo — 01",
-"Cuba rim — 01",
-"Almotolia álcool — 01",
-"Almotolia PVPI — 01"
-]
-},
-
-{
-nome:"COMPARTIMENTO FECHADO INFERIOR 02",
-itens:[
-"KED adulto — 01"
-]
-},
-
-{
-nome:"VIATURA",
-itens:[
-"Garrote — 02"
+["luvas","LUVA P, M E G","01 DE CADA"],
+["mascara","MÁSCARA DESCARTÁVEL","01 CX"],
+["esparadrapo","ESPARADRAPO","01"],
+["cuba-rim","CUBA RIM","01"],
+["almotolia-alcool","ALMOTOLIA ÁLCOOL","01"],
+["almotolia-pvpi","ALMOTOLIA PVPI","01"],
+["lamina-bisturi","LÂMINA DE BISTURI","05"]
 ]
 }
 
 ];
 
-let respostas={};
 
-function criarChecklist(){
+const observacoes={};
 
-const area=document.getElementById("checklist");
-area.innerHTML="";
-let total=0;
 
-categorias.forEach((categoria,ci)=>{
+function criarMateriais(){
 
-const bloco=document.createElement("div");
-bloco.className="category";
+materiais.forEach(grupo=>{
 
-const titulo=document.createElement("div");
-titulo.className="category-title";
-titulo.textContent=categoria.nome;
-bloco.appendChild(titulo);
+const area=document.getElementById(grupo.categoria);
 
-categoria.itens.forEach((item,ii)=>{
+grupo.itens.forEach(item=>{
 
-total++;
-
-const id=ci+"-"+ii;
+const id=item[0];
+const nome=item[1];
+const quantidade=item[2];
 
 const div=document.createElement("div");
+
 div.className="item";
 
 div.innerHTML=`
-<div class="item-name">${item}</div>
 
-<div class="options">
+<div class="item-conteudo">
 
-<button class="sim" id="sim-${id}"
-onclick="responder('${id}','SIM')">
-SIM
-</button>
+<input
+type="checkbox"
+id="check-${id}"
+onchange="atualizarPendencias()"
+>
 
-<button class="nao" id="nao-${id}"
-onclick="responder('${id}','NAO')">
-NÃO
-</button>
+<div class="item-nome">
+
+<strong>${nome}</strong>
+
+<div class="quantidade">
+Quantidade: ${quantidade}
+</div>
 
 </div>
 
-<div class="obs" id="obs-${id}">
-<textarea id="txt-${id}"
-placeholder="Digite a observação obrigatória..."></textarea>
+<strong>SIM (X)</strong>
+
+</div>
+
+`;
+
+area.appendChild(div);
+
+});
+
+});
+
+}
+
+
+function todosMateriais(){
+
+let lista=[];
+
+materiais.forEach(grupo=>{
+grupo.itens.forEach(item=>{
+lista.push(item);
+});
+});
+
+return lista;
+
+}
+
+
+function atualizarPendencias(){
+
+const area=document.getElementById("pendencias");
+
+area.innerHTML="";
+
+let quantidade=0;
+
+todosMateriais().forEach(item=>{
+
+const id=item[0];
+const nome=item[1];
+
+const checkbox=document.getElementById("check-"+id);
+
+if(!checkbox.checked){
+
+quantidade++;
+
+const div=document.createElement("div");
+
+div.className="pendente";
+
+div.innerHTML=`
+
+<strong>${nome}</strong>
+
+<textarea
+placeholder="Digite a observação deste item..."
+oninput="salvarObservacao('${id}',this.value)"
+>${observacoes[id]||""}</textarea>
+
+`;
+
+area.appendChild(div);
+
+}
+
+});
+
+
+if(quantidade===0){
+
+area.innerHTML=`
+<div class="sem-pendencias">
+✓ Todos os itens foram marcados.
 </div>
 `;
 
-bloco.appendChild(div);
-
-});
-
-area.appendChild(bloco);
-
-});
-
-document.getElementById("total").textContent=total;
-
-}
-
-function responder(id,resposta){
-
-const sim=document.getElementById("sim-"+id);
-const nao=document.getElementById("nao-"+id);
-const obs=document.getElementById("obs-"+id);
-const txt=document.getElementById("txt-"+id);
-
-if(respostas[id]===resposta){
-
-delete respostas[id];
-
-sim.classList.remove("selected");
-nao.classList.remove("selected");
-
-sim.disabled=false;
-nao.disabled=false;
-
-obs.classList.remove("show");
-txt.value="";
-
-}else{
-
-respostas[id]=resposta;
-
-if(resposta==="SIM"){
-
-sim.classList.add("selected");
-nao.classList.remove("selected");
-
-sim.disabled=false;
-nao.disabled=true;
-
-obs.classList.remove("show");
-txt.value="";
-
-}else{
-
-nao.classList.add("selected");
-sim.classList.remove("selected");
-
-nao.disabled=false;
-sim.disabled=true;
-
-obs.classList.add("show");
-txt.focus();
-
 }
 
 }
 
-atualizarResumo();
+
+function salvarObservacao(id,valor){
+
+observacoes[id]=valor;
 
 }
 
-function atualizarResumo(){
-
-let sim=0;
-let nao=0;
-
-Object.values(respostas).forEach(r=>{
-if(r==="SIM") sim++;
-if(r==="NAO") nao++;
-});
-
-document.getElementById("simCount").textContent=sim;
-document.getElementById("naoCount").textContent=nao;
-
-}
-
-function marcarTodos(){
-
-categorias.forEach((categoria,ci)=>{
-categoria.itens.forEach((item,ii)=>{
-
-const id=ci+"-"+ii;
-
-respostas[id]="SIM";
-
-document.getElementById("sim-"+id).classList.add("selected");
-document.getElementById("nao-"+id).classList.remove("selected");
-
-document.getElementById("sim-"+id).disabled=false;
-document.getElementById("nao-"+id).disabled=true;
-
-document.getElementById("obs-"+id).classList.remove("show");
-
-});
-
-});
-
-atualizarResumo();
-
-}
-
-function limpar(){
-
-if(!confirm("Deseja realmente limpar todo o checklist?")) return;
-
-respostas={};
-
-document.querySelectorAll(".sim,.nao").forEach(btn=>{
-btn.classList.remove("selected");
-btn.disabled=false;
-});
-
-document.querySelectorAll(".obs").forEach(o=>{
-o.classList.remove("show");
-});
-
-document.querySelectorAll("textarea").forEach(t=>{
-t.value="";
-});
-
-atualizarResumo();
-
-}
-
-function imprimir(){
-
-let faltando=[];
-
-Object.keys(respostas).forEach(id=>{
-
-if(respostas[id]==="NAO"){
-
-const txt=document.getElementById("txt-"+id);
-
-if(!txt.value.trim()){
-faltando.push(id);
-}
-
-}
-
-});
-
-if(faltando.length>0){
-
-alert("Preencha a observação dos itens marcados como NÃO.");
-return;
-
-}
-
-window.print();
-
-}
 
 function atualizarDataHora(){
 
 const agora=new Date();
 
-document.getElementById("dataHora").textContent=
-agora.toLocaleDateString("pt-BR")+" — "+
-agora.toLocaleTimeString("pt-BR");
+const data=agora.toLocaleDateString("pt-BR");
+
+const hora=agora.toLocaleTimeString("pt-BR");
+
+document.getElementById("dataHora").innerText=
+"Data: "+data+" | Hora: "+hora;
+
+document.getElementById("data").value=data;
 
 }
 
-document.getElementById("placa").value=
-localStorage.getItem("placaAmbulancia")||"";
 
-document.getElementById("responsavel").value=
-localStorage.getItem("responsavelAmbulancia")||"";
+function validarFormulario(){
 
-document.getElementById("placa").addEventListener("input",e=>{
-localStorage.setItem("placaAmbulancia",e.target.value);
+const placa=document.getElementById("placa");
+const nome=document.getElementById("nomeCompleto");
+const coren=document.getElementById("corenPB");
+
+
+if(!placa.value){
+
+alert("⚠️ Selecione a placa da ambulância antes de finalizar.");
+
+placa.focus();
+
+return false;
+
+}
+
+
+const nomeValor=nome.value.trim();
+
+if(!nomeValor){
+
+alert("⚠️ Digite o NOME COMPLETO do profissional.");
+
+nome.focus();
+
+return false;
+
+}
+
+
+if(nomeValor.split(/\s+/).length<2){
+
+alert("⚠️ Digite o NOME COMPLETO, incluindo nome e sobrenome.");
+
+nome.focus();
+
+return false;
+
+}
+
+
+if(!coren.value.trim()){
+
+alert("⚠️ Digite o NÚMERO DO COREN-PB antes de finalizar.");
+
+coren.focus();
+
+return false;
+
+}
+
+
+return true;
+
+}
+
+
+function atualizarRodape(){
+
+const nome=document.getElementById("nomeCompleto").value.trim();
+
+const coren=document.getElementById("corenPB").value.trim();
+
+if(nome&&coren){
+
+document.getElementById("rodapeProfissional").innerText=
+nome+" — COREN-PB "+coren;
+
+}
+
+}
+
+
+function baixarPDF(){
+
+if(!validarFormulario()){
+return;
+}
+
+atualizarRodape();
+
+window.print();
+
+}
+
+
+function compartilharWhatsApp(){
+
+if(!validarFormulario()){
+return;
+}
+
+const placa=document.getElementById("placa").value;
+const nome=document.getElementById("nomeCompleto").value;
+const coren=document.getElementById("corenPB").value;
+
+const mensagem=
+"CHECK LIST — AMBULÂNCIA TIPO A\n\n"+
+"Placa: "+placa+"\n"+
+"Profissional: "+nome+"\n"+
+"COREN-PB: "+coren+"\n\n"+
+"Checklist realizado pela Secretaria Municipal de Saúde.";
+
+const url=
+"https://wa.me/?text="+encodeURIComponent(mensagem);
+
+window.open(url,"_blank");
+
+}
+
+
+function novaChecagem(){
+
+const confirmar=confirm(
+"Deseja iniciar uma nova checagem? Os dados atuais serão apagados."
+);
+
+if(!confirmar){
+return;
+}
+
+limparDados();
+
+}
+
+
+function limparDados(){
+
+document.getElementById("placa").value="";
+document.getElementById("nomeCompleto").value="";
+document.getElementById("corenPB").value="";
+document.getElementById("arComprimido").value="";
+document.getElementById("oxigenio").value="";
+document.getElementById("torpedoMovel").value="";
+
+todosMateriais().forEach(item=>{
+
+const checkbox=document.getElementById("check-"+item[0]);
+
+checkbox.checked=false;
+
 });
 
-document.getElementById("responsavel").addEventListener("input",e=>{
-localStorage.setItem("responsavelAmbulancia",e.target.value);
+Object.keys(observacoes).forEach(chave=>{
+delete observacoes[chave];
 });
 
-criarChecklist();
+document.getElementById("rodapeProfissional").innerText=
+"______________________________";
+
+atualizarPendencias();
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+document
+.getElementById("nomeCompleto")
+.addEventListener("input",atualizarRodape);
+
+document
+.getElementById("corenPB")
+.addEventListener("input",atualizarRodape);
+
+
+window.addEventListener("afterprint",function(){
+
+limparDados();
+
+});
+
+
+criarMateriais();
+
 atualizarDataHora();
+
+atualizarPendencias();
 
 setInterval(atualizarDataHora,1000);
 

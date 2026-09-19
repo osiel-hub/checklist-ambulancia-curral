@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Checklist Ambulância Tipo A - Curral de Cima</title>
+<title>Checklist Ambulância Tipo A</title>
 
 <style>
+
+/* =====================================================
+   CONFIGURAÇÕES GERAIS
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -15,348 +22,556 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #f1f4f7;
-    color: #222;
+    background: linear-gradient(135deg, #eef7ff, #f0fdf4);
+    color: #1f2937;
 }
+
+body.app-bloqueado {
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+.header {
+    background: linear-gradient(135deg, #064e3b, #075985);
+    color: white;
+    text-align: center;
+    padding: 24px 15px 22px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.20);
+}
+
+.brasao-oficial {
+    width: 150px;
+    height: 125px;
+    margin: 0 auto 8px;
+    overflow: hidden;
+    border-radius: 18px;
+    background: white;
+    border: 4px solid #facc15;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+    position: relative;
+}
+
+.brasao-oficial img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transform: translateY(-4px);
+}
+
+.header h1 {
+    margin: 7px 0 4px;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: .4px;
+}
+
+.header h2 {
+    margin: 4px 0;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.header h3 {
+    margin: 12px 0 5px;
+    font-size: 21px;
+    color: #fef08a;
+}
+
+.header p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   CONTAINER
+===================================================== */
 
 .container {
-    max-width: 900px;
-    margin: 0 auto;
-    background: white;
-    min-height: 100vh;
-    padding: 20px;
+    width: 95%;
+    max-width: 1100px;
+    margin: 20px auto 50px;
 }
 
-/* ================= CABEÇALHO ================= */
 
-.cabecalho {
-    text-align: center;
-    border-bottom: 3px solid #1d5f91;
-    padding-bottom: 15px;
+/* =====================================================
+   CARTÕES
+===================================================== */
+
+.card {
+    background: white;
+    border-radius: 14px;
     margin-bottom: 18px;
+    padding: 18px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.10);
+    border-left: 6px solid #0f766e;
 }
 
-.brasao-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.brasao {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    border: 2px solid #1d5f91;
-    margin-bottom: 5px;
-}
-
-.brasao img {
-    width: 190px;
-    height: 190px;
-    object-fit: cover;
-}
-
-.nome-curral {
+.card-title {
+    margin: -18px -18px 16px;
+    padding: 13px 16px;
+    background: linear-gradient(90deg, #075985, #0f766e);
+    color: white;
+    border-radius: 10px 10px 0 0;
     font-size: 18px;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   DATA E HORA
+===================================================== */
+
+.datetime {
+    background: #ecfdf5;
+    border: 2px solid #10b981;
+    color: #065f46;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
     font-weight: bold;
-    color: #1d5f91;
-    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+
+/* =====================================================
+   PLACA
+===================================================== */
+
+.placa-instrucao {
+    margin-bottom: 12px;
+    font-weight: bold;
+    color: #075985;
+}
+
+.placas-escolha {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.placa-option {
+    position: relative;
+}
+
+.placa-option input {
+    position: absolute;
+    opacity: 0;
+}
+
+.placa-label {
+    display: block;
+    background: #fefce8;
+    border: 3px solid #94a3b8;
+    color: #111827;
+    font-size: 22px;
+    font-weight: 900;
+    padding: 18px 10px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.placa-label:hover {
+    border-color: #075985;
+    transform: translateY(-2px);
+}
+
+.placa-option input:checked + .placa-label {
+    background: #dcfce7;
+    border-color: #16a34a;
+    color: #166534;
+    box-shadow: 0 0 0 3px rgba(22,163,74,.15);
+}
+
+.placa-label::before {
+    content: "○ ";
+}
+
+.placa-option input:checked + .placa-label::before {
+    content: "✓ ";
+}
+
+
+/* =====================================================
+   CAMPOS
+===================================================== */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 18px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
     margin-bottom: 6px;
 }
 
-.prefeitura {
-    font-size: 20px;
-    font-weight: bold;
-    color: #222;
-}
-
-.secretaria {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 5px;
-}
-
-.titulo {
-    font-size: 22px;
-    font-weight: bold;
-    color: #1d5f91;
-    margin-top: 12px;
-}
-
-.subtitulo {
-    font-size: 14px;
-    color: #555;
-    margin-top: 5px;
-}
-
-/* ================= DATA / HORA ================= */
-
-.data-hora {
-    background: #eaf3fa;
-    border: 1px solid #b9d3e6;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 15px;
-    text-align: center;
-    font-weight: bold;
-}
-
-/* ================= DADOS ================= */
-
-.dados {
-    background: #f7f7f7;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 18px;
-    border: 1px solid #ddd;
-}
-
-.linha {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-}
-
-.campo {
-    flex: 1;
-    min-width: 200px;
-}
-
-.campo label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+.required {
+    color: #dc2626;
 }
 
 input[type="text"],
 input[type="number"],
 textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #aaa;
-    border-radius: 6px;
+    padding: 11px;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
     font-size: 15px;
+    outline: none;
 }
 
 input:focus,
 textarea:focus {
-    outline: none;
-    border-color: #1d5f91;
+    border-color: #0f766e;
+    box-shadow: 0 0 0 2px rgba(15,118,110,.12);
 }
 
-/* ================= BOTÕES ================= */
 
-.botoes-topo {
+/* =====================================================
+   MARCAR TUDO
+===================================================== */
+
+.mark-all-area {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 18px;
+    justify-content: center;
+    margin: 15px 0;
 }
 
-button {
+.btn-mark {
+    background: #16a34a;
+    color: white;
     border: none;
-    border-radius: 7px;
-    padding: 12px 16px;
-    font-size: 15px;
+    padding: 14px 25px;
+    border-radius: 9px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,.15);
 }
 
-.btn-marcar {
-    background: #198754;
-    color: white;
+.btn-mark:hover {
+    background: #15803d;
 }
 
-.btn-pdf {
-    background: #1d5f91;
-    color: white;
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status {
+    padding: 12px;
+    border-radius: 9px;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
 }
 
-.btn-whatsapp {
-    background: #25d366;
-    color: white;
+.status.ok {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
 }
 
-.btn-nova {
-    background: #6c757d;
-    color: white;
+.status.pending {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
 }
 
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
 
-/* ================= CATEGORIAS ================= */
+/* =====================================================
+   CATEGORIAS
+===================================================== */
 
-.categoria {
-    border: 1px solid #cfd8df;
-    border-radius: 8px;
-    margin-bottom: 15px;
+.category {
+    margin-top: 20px;
+    border: 1px solid #dbeafe;
+    border-radius: 10px;
     overflow: hidden;
 }
 
-.categoria-titulo {
-    background: #1d5f91;
-    color: white;
-    padding: 12px;
+.category-title {
+    background: #dbeafe;
+    color: #075985;
+    padding: 11px 13px;
+    font-weight: 800;
     font-size: 16px;
-    font-weight: bold;
 }
 
+
+/* =====================================================
+   ITENS
+===================================================== */
+
 .item {
-    display: flex;
+    display: grid;
+    grid-template-columns: 42px 1fr 110px;
     align-items: center;
     gap: 10px;
-    padding: 11px 12px;
-    border-top: 1px solid #e2e2e2;
+    padding: 12px;
+    border-top: 1px solid #e5e7eb;
     background: white;
 }
 
 .item:nth-child(even) {
-    background: #fafafa;
+    background: #f9fafb;
 }
 
 .item input[type="checkbox"] {
-    width: 22px;
-    height: 22px;
+    width: 25px;
+    height: 25px;
     cursor: pointer;
-    flex-shrink: 0;
+    accent-color: #16a34a;
 }
 
-.item-texto {
-    flex: 1;
+.item-name {
+    font-size: 15px;
+    font-weight: 600;
 }
 
-.item-nome {
+.quantity {
+    text-align: center;
     font-weight: bold;
+    color: #075985;
 }
 
-.quantidade {
-    color: #555;
-    font-size: 13px;
-}
 
-/* ================= TORPEDOS ================= */
+/* =====================================================
+   PENDÊNCIAS
+===================================================== */
 
-.torpedo-box {
+.pending-item {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-left: 5px solid #f97316;
     padding: 12px;
-    background: #fafafa;
-    border-top: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
 }
 
-.torpedo-linha {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-}
-
-.torpedo-linha label {
+.pending-name {
     font-weight: bold;
-    min-width: 230px;
-}
-
-.torpedo-linha input {
-    width: 160px;
-}
-
-/* ================= OBSERVAÇÃO ================= */
-
-.observacao-box {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.observacao-box label {
-    display: block;
-    font-size: 17px;
-    font-weight: bold;
+    color: #9a3412;
     margin-bottom: 7px;
 }
 
-#observacao {
-    min-height: 170px;
-    resize: vertical;
+.pending-item textarea {
+    min-height: 60px;
+    border-color: #fdba74;
 }
 
-/* ================= PENDÊNCIAS ================= */
 
-.pendencias {
-    background: #fff8e1;
-    border: 1px solid #e4c65c;
-    border-radius: 8px;
+/* =====================================================
+   TORPEDOS
+===================================================== */
+
+.oxygen-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.oxygen-box {
+    background: #f0fdf4;
+    border: 2px solid #86efac;
+    border-radius: 10px;
     padding: 15px;
-    margin-bottom: 20px;
 }
 
-.pendencias h3 {
+.oxygen-box h4 {
     margin-top: 0;
-    color: #795600;
+    color: #166534;
 }
 
-#listaPendencias {
-    margin: 0;
-    padding-left: 22px;
+.oxygen-box input {
+    margin-top: 8px;
 }
 
-#listaPendencias li {
-    margin-bottom: 6px;
+
+/* =====================================================
+   OBSERVAÇÕES
+===================================================== */
+
+textarea.obs-geral {
+    min-height: 120px;
 }
 
-/* ================= RODAPÉ ================= */
 
-.rodape {
-    border-top: 1px solid #ccc;
-    padding-top: 15px;
+/* =====================================================
+   BOTÕES
+===================================================== */
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
     margin-top: 20px;
-    font-size: 13px;
-    color: #555;
 }
 
-/* ================= BLOQUEIO ================= */
+.btn {
+    border: none;
+    padding: 15px;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-pdf {
+    background: #075985;
+}
+
+.btn-whatsapp {
+    background: #16a34a;
+}
+
+.btn-new {
+    background: #dc2626;
+}
+
+.btn:hover {
+    opacity: .9;
+}
+
+.btn:disabled {
+    background: #94a3b8 !important;
+    cursor: not-allowed;
+    opacity: .65;
+}
+
+
+/* =====================================================
+   RODAPÉ
+===================================================== */
+
+.footer {
+    text-align: center;
+    color: #64748b;
+    font-size: 13px;
+    margin-top: 25px;
+}
+
+
+/* =====================================================
+   TELA CHECKAGEM CONCLUÍDA
+===================================================== */
 
 #telaFinalizada {
     display: none;
     position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.94);
-    color: white;
     z-index: 99999;
+    inset: 0;
+    background: linear-gradient(135deg, #064e3b, #075985);
+    color: white;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 25px;
 }
 
-.finalizada-conteudo {
-    max-width: 600px;
+.final-box {
+    width: 95%;
+    max-width: 540px;
+    background: white;
+    color: #1f2937;
+    border-radius: 18px;
+    padding: 35px 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.35);
 }
 
-.finalizada-conteudo .icone {
-    font-size: 70px;
-    margin-bottom: 15px;
+.final-icon {
+    font-size: 65px;
+    margin-bottom: 10px;
 }
 
-.finalizada-conteudo h1 {
-    font-size: 34px;
+.final-box h2 {
+    color: #166534;
     margin: 10px 0;
+    font-size: 27px;
 }
 
-.finalizada-conteudo p {
-    font-size: 18px;
-    line-height: 1.5;
+.final-box p {
+    line-height: 1.6;
 }
 
-/* ================= IMPRESSÃO ================= */
+.final-warning {
+    background: #fef2f2;
+    border: 2px solid #fca5a5;
+    color: #991b1b;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 18px;
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .header h1 {
+        font-size: 19px;
+    }
+
+    .header h2 {
+        font-size: 14px;
+    }
+
+    .header h3 {
+        font-size: 17px;
+    }
+
+    .brasao-oficial {
+        width: 130px;
+        height: 110px;
+    }
+
+    .brasao-oficial img {
+        width: 130px;
+        height: 130px;
+    }
+
+    .info-grid,
+    .oxygen-grid,
+    .actions,
+    .placas-escolha {
+        grid-template-columns: 1fr;
+    }
+
+    .item {
+        grid-template-columns: 38px 1fr;
+    }
+
+    .quantity {
+        grid-column: 2;
+        text-align: left;
+        font-size: 13px;
+    }
+
+}
+
+
+/* =====================================================
+   IMPRESSÃO
+===================================================== */
 
 @media print {
 
@@ -364,853 +579,897 @@ button:disabled {
         background: white;
     }
 
-    .container {
-        width: 100%;
-        max-width: none;
-        padding: 10px;
+    .actions,
+    .mark-all-area {
+        display: none !important;
     }
 
-    .botoes-topo,
+    .card {
+        box-shadow: none;
+        break-inside: avoid;
+    }
+
+    .header {
+        box-shadow: none;
+    }
+
     #telaFinalizada {
         display: none !important;
     }
 
-    .categoria {
-        break-inside: avoid;
-    }
-
-    .item {
-        padding: 7px;
-    }
-
-    .observacao-box {
-        break-inside: avoid;
-    }
-}
-
-/* ================= CELULAR ================= */
-
-@media (max-width: 600px) {
-
-    .container {
-        padding: 12px;
-    }
-
-    .prefeitura {
-        font-size: 17px;
-    }
-
-    .secretaria {
-        font-size: 14px;
-    }
-
-    .titulo {
-        font-size: 19px;
-    }
-
-    .linha {
-        display: block;
-    }
-
-    .campo {
-        margin-bottom: 12px;
-    }
-
-    .botoes-topo button {
-        width: 100%;
-    }
-
-    .torpedo-linha {
-        display: block;
-    }
-
-    .torpedo-linha label {
-        display: block;
-        margin-bottom: 6px;
-    }
-
-    .torpedo-linha input {
-        width: 100%;
-    }
 }
 
 </style>
+
 </head>
+
 
 <body>
 
-<div class="container" id="aplicativo">
 
-    <!-- ================= CABEÇALHO ================= -->
+<!-- =====================================================
+     CABEÇALHO
+===================================================== -->
 
-    <div class="cabecalho">
+<header class="header">
 
-        <div class="brasao-area">
+    <div class="brasao-oficial">
 
-            <div class="brasao">
-
-                <img
-                    src="https://curraldecima.pb.gov.br/arquivos/noticias/noticia_1738848101.jpg"
-                    alt="Brasão Oficial de Curral de Cima"
-                >
-
-            </div>
-
-            <div class="nome-curral">
-                CURRAL DE CIMA
-            </div>
-
-            <div class="prefeitura">
-                PREFEITURA MUNICIPAL DE CURRAL DE CIMA
-            </div>
-
-            <div class="secretaria">
-                SECRETARIA MUNICIPAL DE SAÚDE
-            </div>
-
-            <div class="titulo">
-                CHECK LIST — AMBULÂNCIA TIPO A
-            </div>
-
-            <div class="subtitulo">
-                Controle diário de materiais e equipamentos
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- ================= DATA / HORA ================= -->
-
-    <div class="data-hora" id="dataHora">
-        Carregando data e hora...
-    </div>
-
-    <!-- ================= DADOS ================= -->
-
-    <div class="dados">
-
-        <div class="linha">
-
-            <div class="campo">
-
-                <label for="placa">
-                    PLACA DA AMBULÂNCIA *
-                </label>
-
-                <select
-                    id="placa"
-                    style="width:100%; padding:10px; border:1px solid #aaa; border-radius:6px; font-size:15px;"
-                >
-
-                    <option value="">
-                        Selecione a placa
-                    </option>
-
-                    <option value="QFS2I41">
-                        QFS2I41
-                    </option>
-
-                    <option value="TOT3F49">
-                        TOT3F49
-                    </option>
-
-                </select>
-
-            </div>
-
-            <div class="campo">
-
-                <label for="enfermeiro">
-                    ENFERMEIRO *
-                </label>
-
-                <input
-                    type="text"
-                    id="enfermeiro"
-                    placeholder="Nome completo"
-                >
-
-            </div>
-
-        </div>
-
-        <div class="linha">
-
-            <div class="campo">
-
-                <label for="coren">
-                    NÚMERO DO COREN-PB *
-                </label>
-
-                <input
-                    type="text"
-                    id="coren"
-                    placeholder="Digite o COREN-PB"
-                >
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- ================= BOTÕES ================= -->
-
-    <div class="botoes-topo">
-
-        <button
-            type="button"
-            class="btn-marcar"
-            id="btnMarcar"
-            onclick="marcarTudo()"
+        <img
+            src="https://curraldecima.pb.gov.br/arquivos/noticias/noticia_1738848101.jpg"
+            alt="Brasão Oficial do Município de Curral de Cima"
         >
-            MARCAR TUDO
-        </button>
-
-        <button
-            type="button"
-            class="btn-pdf"
-            id="btnPDF"
-            onclick="baixarPDF()"
-        >
-            BAIXAR PDF
-        </button>
-
-        <button
-            type="button"
-            class="btn-whatsapp"
-            id="btnWhatsApp"
-            onclick="compartilharWhatsApp()"
-        >
-            COMPARTILHAR NO WHATSAPP
-        </button>
-
-        <button
-            type="button"
-            class="btn-nova"
-            id="btnNova"
-            onclick="novaChecagem()"
-        >
-            NOVA CHECAGEM
-        </button>
 
     </div>
 
 
-    <!-- ========================================================= -->
-    <!-- 1 - VENTILAÇÃO E REANIMAÇÃO -->
-    <!-- ========================================================= -->
+    <h1>
+        PREFEITURA MUNICIPAL DE CURRAL DE CIMA
+    </h1>
 
-    <div class="categoria">
 
-        <div class="categoria-titulo">
-            1. VENTILAÇÃO E REANIMAÇÃO
-        </div>
+    <h2>
+        SECRETARIA MUNICIPAL DE SAÚDE
+    </h2>
 
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="AMBU ADULTO">
-            <div class="item-texto">
-                <div class="item-nome">AMBU ADULTO</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
 
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="AMBU PEDIÁTRICO">
-            <div class="item-texto">
-                <div class="item-nome">AMBU PEDIÁTRICO</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
+    <h3>
+        CHECK LIST — AMBULÂNCIA TIPO A
+    </h3>
 
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="MÁSCARA COM RESERVATÓRIO ADULTA">
-            <div class="item-texto">
-                <div class="item-nome">MÁSCARA COM RESERVATÓRIO ADULTA</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
 
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="MÁSCARA COM RESERVATÓRIO INFANTIL">
-            <div class="item-texto">
-                <div class="item-nome">MÁSCARA COM RESERVATÓRIO INFANTIL</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
+    <p>
+        Controle diário de materiais, equipamentos e oxigenoterapia
+    </p>
 
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="CÂNULA DE GUEDEL">
-            <div class="item-texto">
-                <div class="item-nome">CÂNULA DE GUEDEL</div>
-                <div class="quantidade">Quantidade: 02</div>
-            </div>
-        </div>
+</header>
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     DATA E HORA
+===================================================== -->
+
+<div
+    class="datetime"
+    id="dataHora"
+>
+    Carregando data e hora...
+</div>
+
+
+<!-- =====================================================
+     IDENTIFICAÇÃO
+===================================================== -->
+
+<div class="card">
+
+    <div class="card-title">
+        IDENTIFICAÇÃO DA AMBULÂNCIA
+    </div>
+
+
+    <div class="placa-instrucao">
+
+        🚑 SELECIONE A PLACA DA AMBULÂNCIA:
+        <span class="required">*</span>
 
     </div>
 
 
-    <!-- ========================================================= -->
-    <!-- 2 - FLUIDOTERAPIA E ACESSO VENOSO -->
-    <!-- ========================================================= -->
+    <div class="placas-escolha">
 
-    <div class="categoria">
 
-        <div class="categoria-titulo">
-            2. FLUIDOTERAPIA E ACESSO VENOSO
+        <div class="placa-option">
+
+            <input
+                type="radio"
+                name="placa"
+                id="placaQFS"
+                value="QFS2I41"
+            >
+
+            <label
+                class="placa-label"
+                for="placaQFS"
+            >
+                QFS2I41
+            </label>
+
         </div>
 
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="SF 0,9% 500 ML">
-            <div class="item-texto">
-                <div class="item-nome">SF 0,9% 500 ML</div>
-                <div class="quantidade">Quantidade: 05</div>
-            </div>
+
+        <div class="placa-option">
+
+            <input
+                type="radio"
+                name="placa"
+                id="placaTOT"
+                value="TOT3F49"
+            >
+
+            <label
+                class="placa-label"
+                for="placaTOT"
+            >
+                TOT3F49
+            </label>
+
         </div>
 
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="SORO RL 500 ML">
-            <div class="item-texto">
-                <div class="item-nome">SORO RL 500 ML</div>
-                <div class="quantidade">Quantidade: 05</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="SG 5% 500 ML">
-            <div class="item-texto">
-                <div class="item-nome">SG 5% 500 ML</div>
-                <div class="quantidade">Quantidade: 05</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="JELCO 14, 16, 18, 20, 22, 24">
-            <div class="item-texto">
-                <div class="item-nome">JELCO 14, 16, 18, 20, 22, 24</div>
-                <div class="quantidade">Quantidade: 05 de cada</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="SCALPE">
-            <div class="item-texto">
-                <div class="item-nome">SCALPE</div>
-                <div class="quantidade">Quantidade: 05</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="SERINGAS 01, 03, 05, 10, 20 ML">
-            <div class="item-texto">
-                <div class="item-nome">SERINGAS 01, 03, 05, 10, 20 ML</div>
-                <div class="quantidade">Quantidade: 05</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="EQUIPO MACROGOTAS">
-            <div class="item-texto">
-                <div class="item-nome">EQUIPO MACROGOTAS</div>
-                <div class="quantidade">Quantidade: 10</div>
-            </div>
-        </div>
-
-        <!-- GARROTE TRANSFERIDO PARA ESTA CATEGORIA -->
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="GARROTE">
-            <div class="item-texto">
-                <div class="item-nome">GARROTE</div>
-                <div class="quantidade">Quantidade: 02</div>
-            </div>
-        </div>
 
     </div>
 
 
-    <!-- ========================================================= -->
-    <!-- 3 - OXIGENOTERAPIA E VIAS AÉREAS -->
-    <!-- ========================================================= -->
+    <div class="info-grid">
 
-    <div class="categoria">
 
-        <div class="categoria-titulo">
-            3. OXIGENOTERAPIA E VIAS AÉREAS
-        </div>
+        <div>
 
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="CATETER NASAL">
-            <div class="item-texto">
-                <div class="item-nome">CATETER NASAL</div>
-                <div class="quantidade">Quantidade: 05</div>
-            </div>
-        </div>
+            <label>
+                ENFERMEIRO
+                <span class="required">*</span>
+            </label>
 
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="LÁTEX / EXTENSÃO DE O2">
-            <div class="item-texto">
-                <div class="item-nome">LÁTEX / EXTENSÃO DE O2</div>
-                <div class="quantidade">Quantidade: 03</div>
-            </div>
-        </div>
 
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="MÁSCARA DE NEBULIZAÇÃO">
-            <div class="item-texto">
-                <div class="item-nome">MÁSCARA DE NEBULIZAÇÃO</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="MÁSCARA DE VENTURI">
-            <div class="item-texto">
-                <div class="item-nome">MÁSCARA DE VENTURI</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-    </div>
-
-
-    <!-- ========================================================= -->
-    <!-- 4 - MONITORIZAÇÃO E AVALIAÇÃO -->
-    <!-- ========================================================= -->
-
-    <div class="categoria">
-
-        <div class="categoria-titulo">
-            4. MONITORIZAÇÃO E AVALIAÇÃO
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="OXÍMETRO">
-            <div class="item-texto">
-                <div class="item-nome">OXÍMETRO</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="TERMÔMETRO">
-            <div class="item-texto">
-                <div class="item-nome">TERMÔMETRO</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="ESTETOSCÓPIO E TENSIÔMETRO ADULTO">
-            <div class="item-texto">
-                <div class="item-nome">
-                    ESTETOSCÓPIO E TENSIÔMETRO ADULTO
-                </div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="ESTETOSCÓPIO E TENSIÔMETRO INFANTIL">
-            <div class="item-texto">
-                <div class="item-nome">
-                    ESTETOSCÓPIO E TENSIÔMETRO INFANTIL
-                </div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-    </div>
-
-
-    <!-- ========================================================= -->
-    <!-- 5 - TRAUMA E IMOBILIZAÇÃO -->
-    <!-- ========================================================= -->
-
-    <div class="categoria">
-
-        <div class="categoria-titulo">
-            5. TRAUMA E IMOBILIZAÇÃO
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="MANTA TÉRMICA">
-            <div class="item-texto">
-                <div class="item-nome">MANTA TÉRMICA</div>
-                <div class="quantidade">Quantidade: 02</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="GAZE">
-            <div class="item-texto">
-                <div class="item-nome">GAZE</div>
-                <div class="quantidade">Quantidade: 10</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="ATADURA">
-            <div class="item-texto">
-                <div class="item-nome">ATADURA</div>
-                <div class="quantidade">Quantidade: 10</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="COLAR CERVICAL">
-            <div class="item-texto">
-                <div class="item-nome">COLAR CERVICAL</div>
-                <div class="quantidade">
-                    Neonatal, infantil, P, M, G e regulável — 01 de cada
-                </div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="COXINS">
-            <div class="item-texto">
-                <div class="item-nome">COXINS</div>
-                <div class="quantidade">Quantidade: 01 par</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="KED ADULTO">
-            <div class="item-texto">
-                <div class="item-nome">KED ADULTO</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="PRANCHA ADULTA COM B.E + TIRADENTES">
-            <div class="item-texto">
-                <div class="item-nome">
-                    PRANCHA ADULTA COM B.E + TIRADENTES
-                </div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-    </div>
-
-
-    <!-- ========================================================= -->
-    <!-- 6 - PARTO E CUIDADOS GERAIS -->
-    <!-- ========================================================= -->
-
-    <div class="categoria">
-
-        <div class="categoria-titulo">
-            6. PARTO E CUIDADOS GERAIS
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="KIT PARTO">
-            <div class="item-texto">
-                <div class="item-nome">KIT PARTO</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="COLCHA">
-            <div class="item-texto">
-                <div class="item-nome">COLCHA</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="LENÇOL DESCARTÁVEL">
-            <div class="item-texto">
-                <div class="item-nome">LENÇOL DESCARTÁVEL</div>
-                <div class="quantidade">Quantidade: 10</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="LENÇOL">
-            <div class="item-texto">
-                <div class="item-nome">LENÇOL</div>
-                <div class="quantidade">Quantidade: 02</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="FRALDA DESCARTÁVEL">
-            <div class="item-texto">
-                <div class="item-nome">FRALDA DESCARTÁVEL</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-    </div>
-
-
-    <!-- ========================================================= -->
-    <!-- 7 - PROTEÇÃO E HIGIENE -->
-    <!-- ========================================================= -->
-
-    <div class="categoria">
-
-        <div class="categoria-titulo">
-            7. PROTEÇÃO E HIGIENE
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="LUVA P, M, G">
-            <div class="item-texto">
-                <div class="item-nome">LUVA P, M, G</div>
-                <div class="quantidade">Quantidade: 01 caixa de cada</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="MÁSCARA DESCARTÁVEL">
-            <div class="item-texto">
-                <div class="item-nome">MÁSCARA DESCARTÁVEL</div>
-                <div class="quantidade">Quantidade: 01 caixa</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="ESPARADRAPO">
-            <div class="item-texto">
-                <div class="item-nome">ESPARADRAPO</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="CUBA RIM">
-            <div class="item-texto">
-                <div class="item-nome">CUBA RIM</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="ALMOTOLIA ÁLCOOL">
-            <div class="item-texto">
-                <div class="item-nome">ALMOTOLIA ÁLCOOL</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="ALMOTOLIA PVPI">
-            <div class="item-texto">
-                <div class="item-nome">ALMOTOLIA PVPI</div>
-                <div class="quantidade">Quantidade: 01</div>
-            </div>
-        </div>
-
-        <div class="item">
-            <input type="checkbox" class="check-item"
-                data-nome="LÂMINA DE BISTURI">
-            <div class="item-texto">
-                <div class="item-nome">LÂMINA DE BISTURI</div>
-                <div class="quantidade">Quantidade: 05</div>
-            </div>
-        </div>
-
-    </div>
-
-
-    <!-- ========================================================= -->
-    <!-- 8 - CONTROLE DE TORPEDO -->
-    <!-- ========================================================= -->
-
-    <div class="categoria">
-
-        <div class="categoria-titulo">
-            8. CONTROLE DE TORPEDO
-        </div>
-
-        <div class="torpedo-box">
-
-            <div class="torpedo-linha">
-
-                <label for="arComprimido">
-                    AR COMPRIMIDO — LITROS:
-                </label>
-
-                <input
-                    type="number"
-                    id="arComprimido"
-                    min="0"
-                    step="0.1"
-                    placeholder="Informe os litros"
-                    oninput="atualizarPendencias()"
-                >
-
-            </div>
-
-
-            <div class="torpedo-linha">
-
-                <label for="oxigenio">
-                    O₂ — OXIGÊNIO — LITROS:
-                </label>
-
-                <input
-                    type="number"
-                    id="oxigenio"
-                    min="0"
-                    step="0.1"
-                    placeholder="Informe os litros"
-                    oninput="atualizarPendencias()"
-                >
-
-            </div>
-
-
-            <div class="torpedo-linha">
-
-                <label for="torpedoMovel">
-                    TORPEDO MÓVEL DE O₂ — LITROS:
-                </label>
-
-                <input
-                    type="number"
-                    id="torpedoMovel"
-                    min="0"
-                    step="0.1"
-                    placeholder="Informe os litros"
-                    oninput="atualizarPendencias()"
-                >
-
-            </div>
+            <input
+                type="text"
+                id="enfermeiro"
+                placeholder="Digite o nome completo"
+            >
 
         </div>
 
-    </div>
+
+        <div>
+
+            <label>
+                NÚMERO DO COREN-PB
+                <span class="required">*</span>
+            </label>
 
 
-    <!-- ========================================================= -->
-    <!-- PENDÊNCIAS -->
-    <!-- ========================================================= -->
+            <input
+                type="text"
+                id="coren"
+                placeholder="Digite o número do COREN-PB"
+            >
 
-    <div class="pendencias">
+        </div>
 
-        <h3>
-            ITENS PENDENTES / NÃO INFORMADOS
-        </h3>
-
-        <ul id="listaPendencias">
-
-            <li>
-                Nenhuma pendência identificada.
-            </li>
-
-        </ul>
-
-    </div>
-
-
-    <!-- ========================================================= -->
-    <!-- OBSERVAÇÃO -->
-    <!-- ========================================================= -->
-
-    <div class="observacao-box">
-
-        <label for="observacao">
-            OBSERVAÇÕES
-        </label>
-
-        <textarea
-            id="observacao"
-            placeholder="As pendências serão registradas automaticamente aqui..."
-        ></textarea>
-
-    </div>
-
-
-    <!-- ========================================================= -->
-    <!-- RODAPÉ -->
-    <!-- ========================================================= -->
-
-    <div class="rodape">
-
-        <strong>ENFERMEIRO/COREN:</strong>
-        Responsável pela conferência dos materiais e equipamentos.
 
     </div>
 
 </div>
 
 
-<!-- ============================================================= -->
-<!-- TELA DE CHECAGEM CONCLUÍDA -->
-<!-- ============================================================= -->
+<!-- =====================================================
+     CONTROLE DA CHECAGEM
+===================================================== -->
+
+<div class="card">
+
+    <div class="card-title">
+        CONTROLE DA CHECAGEM
+    </div>
+
+
+    <div class="mark-all-area">
+
+        <button
+            type="button"
+            class="btn-mark"
+            id="btnMarcar"
+            onclick="marcarTodos()"
+        >
+            ✓ MARCAR TUDO
+        </button>
+
+    </div>
+
+
+    <div
+        id="status"
+        class="status pending"
+    >
+        Existem itens pendentes.
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MATERIAIS
+===================================================== -->
+
+<div class="card">
+
+    <div class="card-title">
+        MATERIAIS E EQUIPAMENTOS
+    </div>
+
+
+    <!-- =================================================
+         1. VENTILAÇÃO
+    ================================================== -->
+
+    <div class="category">
+
+        <div class="category-title">
+            1. VENTILAÇÃO E REANIMAÇÃO
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">AMBU ADULTO</div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">AMBU PEDIÁTRICO</div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                MÁSCARA COM RESERVATÓRIO ADULTA
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                MÁSCARA COM RESERVATÓRIO INFANTIL
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                CÂNULA DE GUEDEL
+            </div>
+            <div class="quantity">02 UN.</div>
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         2. FLUIDOTERAPIA
+    ================================================== -->
+
+    <div class="category">
+
+        <div class="category-title">
+            2. FLUIDOTERAPIA E ACESSO VENOSO
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                SF 0,9% — 500 ML
+            </div>
+            <div class="quantity">05 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                SORO RL — 500 ML
+            </div>
+            <div class="quantity">05 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                SG 5% — 500 ML
+            </div>
+            <div class="quantity">05 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                JELCO 14, 16, 18, 20, 22 E 24
+            </div>
+            <div class="quantity">05 DE CD.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                SCALPE
+            </div>
+            <div class="quantity">05 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                SERINGAS 01, 03, 05, 10 E 20 ML
+            </div>
+            <div class="quantity">05 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                EQUIPO MACROGOTAS
+            </div>
+            <div class="quantity">10 UN.</div>
+        </div>
+
+
+        <!-- GARROTE TRANSFERIDO PARA ESTA CATEGORIA -->
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                GARROTE
+            </div>
+            <div class="quantity">02 UN.</div>
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         3. OXIGENOTERAPIA
+    ================================================== -->
+
+    <div class="category">
+
+        <div class="category-title">
+            3. OXIGENOTERAPIA E VIAS AÉREAS
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                CATETER NASAL
+            </div>
+            <div class="quantity">05 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                LÁTEX / EXTENSÃO DE O₂
+            </div>
+            <div class="quantity">03 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                MÁSCARA DE NEBULIZAÇÃO
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                MÁSCARA DE VENTURI
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         4. MONITORIZAÇÃO
+    ================================================== -->
+
+    <div class="category">
+
+        <div class="category-title">
+            4. MONITORIZAÇÃO E AVALIAÇÃO
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                OXÍMETRO
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                TERMÔMETRO
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                ESTETOSCÓPIO E TENSIÔMETRO ADULTO
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                ESTETOSCÓPIO E TENSIÔMETRO INFANTIL
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         5. TRAUMA
+    ================================================== -->
+
+    <div class="category">
+
+        <div class="category-title">
+            5. TRAUMA E IMOBILIZAÇÃO
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                MANTA TÉRMICA
+            </div>
+            <div class="quantity">02 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                GAZE
+            </div>
+            <div class="quantity">10 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                ATADURA
+            </div>
+            <div class="quantity">10 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                COLAR CERVICAL — NEONATAL, INFANTIL, P, M, G E REGULÁVEL
+            </div>
+            <div class="quantity">01 DE CD.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                COXINS
+            </div>
+            <div class="quantity">01 PAR.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                KED ADULTO
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                PRANCHA ADULTA COM B.E + TIRADENTES
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         6. PARTO
+    ================================================== -->
+
+    <div class="category">
+
+        <div class="category-title">
+            6. PARTO E CUIDADOS GERAIS
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                KIT PARTO
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                COLCHA
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                LENÇOL DESCARTÁVEL
+            </div>
+            <div class="quantity">10 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                LENÇOL
+            </div>
+            <div class="quantity">02 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                FRALDA DESCARTÁVEL
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         7. PROTEÇÃO
+    ================================================== -->
+
+    <div class="category">
+
+        <div class="category-title">
+            7. PROTEÇÃO E HIGIENE
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                LUVA P, M E G
+            </div>
+            <div class="quantity">01 CX.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                MÁSCARA DESCARTÁVEL
+            </div>
+            <div class="quantity">01 CX.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                ESPARADRAPO
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                CUBA RIM
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                ALMOTOLIA ÁLCOOL
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                ALMOTOLIA PVPI
+            </div>
+            <div class="quantity">01 UN.</div>
+        </div>
+
+
+        <div class="item">
+            <input type="checkbox" class="material">
+            <div class="item-name">
+                LÂMINA DE BISTURI
+            </div>
+            <div class="quantity">05 UN.</div>
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         8. TORPEDOS
+    ================================================== -->
+
+    <div class="category">
+
+        <div class="category-title">
+            8. CONTROLE DE TORPEDO
+        </div>
+
+
+        <div class="oxygen-grid">
+
+
+            <div class="oxygen-box">
+
+                <h4>
+                    AR COMPRIMIDO
+                </h4>
+
+                <label>
+                    Quantidade / litros:
+                </label>
+
+                <input
+                    type="number"
+                    min="0"
+                    placeholder="Informe"
+                    id="arComprimido"
+                >
+
+            </div>
+
+
+            <div class="oxygen-box">
+
+                <h4>
+                    O₂ — OXIGÊNIO
+                </h4>
+
+                <label>
+                    Quantidade / litros:
+                </label>
+
+                <input
+                    type="number"
+                    min="0"
+                    placeholder="Informe"
+                    id="oxigenio"
+                >
+
+            </div>
+
+
+            <div class="oxygen-box">
+
+                <h4>
+                    TORPEDO MÓVEL DE O₂
+                </h4>
+
+                <label>
+                    Quantidade / litros:
+                </label>
+
+                <input
+                    type="number"
+                    min="0"
+                    placeholder="Informe"
+                    id="torpedoMovel"
+                >
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     PENDÊNCIAS
+===================================================== -->
+
+<div class="card">
+
+    <div class="card-title">
+        ITENS PENDENTES / OBSERVAÇÕES
+    </div>
+
+
+    <div id="pendencias">
+
+        <p style="text-align:center;color:#64748b;">
+            As pendências aparecerão aqui automaticamente.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     OBSERVAÇÃO GERAL
+===================================================== -->
+
+<div class="card">
+
+    <div class="card-title">
+        OBSERVAÇÕES — ITENS NÃO MARCADOS
+    </div>
+
+
+    <textarea
+        id="observacaoGeral"
+        class="obs-geral"
+        placeholder="Os itens não marcados aparecerão automaticamente aqui."
+    ></textarea>
+
+</div>
+
+
+<!-- =====================================================
+     BOTÕES
+===================================================== -->
+
+<div class="actions">
+
+
+    <button
+        class="btn btn-pdf"
+        id="btnPDF"
+        onclick="baixarPDF()"
+    >
+        📄 BAIXAR / SALVAR PDF
+    </button>
+
+
+    <button
+        class="btn btn-whatsapp"
+        id="btnWhatsApp"
+        onclick="compartilharWhatsApp()"
+    >
+        📱 COMPARTILHAR WHATSAPP
+    </button>
+
+
+    <button
+        class="btn btn-new"
+        id="btnNova"
+        onclick="novaChecagem()"
+    >
+        🔄 NOVA CHECAGEM
+    </button>
+
+
+</div>
+
+
+<div class="footer">
+
+    Checklist digital — Ambulância Tipo A
+    <br>
+    Prefeitura Municipal de Curral de Cima — Secretaria Municipal de Saúde
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     TELA DE CHECAGEM CONCLUÍDA
+===================================================== -->
 
 <div id="telaFinalizada">
 
-    <div class="finalizada-conteudo">
+    <div class="final-box">
 
-        <div class="icone">
-            ✓
+        <div class="final-icon">
+            🔒
         </div>
 
-        <h1>
+
+        <h2>
             CHECAGEM CONCLUÍDA
-        </h1>
+        </h2>
+
 
         <p>
-            A checagem desta ambulância foi concluída.
+            A checagem desta ambulância foi finalizada.
         </p>
 
-        <p>
-            Para realizar uma nova checagem,
-            <strong>feche esta tela e abra novamente o aplicativo.</strong>
-        </p>
 
         <p>
-            Os campos estão bloqueados para evitar
-            alteração após a conclusão.
+            O aplicativo foi bloqueado para impedir
+            qualquer alteração após a conclusão.
         </p>
+
+
+        <div class="final-warning">
+
+            ⚠️ PARA REALIZAR UMA NOVA CHECAGEM,
+            FECHE ESTA TELA/ABA E ABRA NOVAMENTE
+            O APLICATIVO.
+
+        </div>
 
     </div>
 
@@ -1219,27 +1478,84 @@ button:disabled {
 
 <script>
 
-/* ================================================================
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
+
+const checkboxes =
+    document.querySelectorAll('.material');
+
+let aplicativoFinalizado = false;
+
+
+/* =====================================================
+   VERIFICAR SE JÁ ESTÁ BLOQUEADO
+===================================================== */
+
+if (
+    sessionStorage.getItem(
+        'checklistFinalizado'
+    ) === 'sim'
+) {
+
+    aplicativoFinalizado = true;
+
+    document.addEventListener(
+        'DOMContentLoaded',
+        function() {
+
+            bloquearVisualmente();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
    DATA E HORA
-================================================================ */
+===================================================== */
 
 function atualizarDataHora() {
 
     const agora = new Date();
 
-    const data = agora.toLocaleDateString(
-        'pt-BR'
-    );
 
-    const hora = agora.toLocaleTimeString(
-        'pt-BR'
-    );
+    const data =
+        agora.toLocaleDateString(
+            'pt-BR',
+            {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            }
+        );
 
-    document.getElementById('dataHora').textContent =
-        'DATA: ' + data + '  |  HORA: ' + hora;
+
+    const hora =
+        agora.toLocaleTimeString(
+            'pt-BR',
+            {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            }
+        );
+
+
+    document.getElementById(
+        'dataHora'
+    ).innerHTML =
+        '📅 Data: ' +
+        data +
+        ' &nbsp;&nbsp; | &nbsp;&nbsp; ⏰ Horário: ' +
+        hora;
+
 }
 
+
 atualizarDataHora();
+
 
 setInterval(
     atualizarDataHora,
@@ -1247,135 +1563,328 @@ setInterval(
 );
 
 
-/* ================================================================
+/* =====================================================
    CHECKBOXES
-================================================================ */
+===================================================== */
 
-function configurarCheckboxes() {
-
-    const checkboxes =
-        document.querySelectorAll('.check-item');
-
-    checkboxes.forEach(function(checkbox) {
+checkboxes.forEach(
+    checkbox => {
 
         checkbox.addEventListener(
             'change',
-            function() {
+            atualizarPendencias
+        );
 
-                atualizarPendencias();
-                atualizarBotaoMarcar();
+    }
+);
+
+
+/* =====================================================
+   MARCAR TUDO
+===================================================== */
+
+function marcarTodos() {
+
+    if (aplicativoFinalizado) {
+        return;
+    }
+
+
+    const todosMarcados =
+        Array.from(checkboxes)
+        .every(
+            checkbox =>
+                checkbox.checked
+        );
+
+
+    checkboxes.forEach(
+        checkbox => {
+
+            checkbox.checked =
+                !todosMarcados;
+
+        }
+    );
+
+
+    atualizarPendencias();
+
+}
+
+
+/* =====================================================
+   VERIFICAR TODOS
+===================================================== */
+
+function todosItensMarcados() {
+
+    return Array.from(
+        checkboxes
+    ).every(
+        checkbox =>
+            checkbox.checked
+    );
+
+}
+
+
+/* =====================================================
+   ATUALIZAR PENDÊNCIAS
+===================================================== */
+
+function atualizarPendencias() {
+
+    const container =
+        document.getElementById(
+            'pendencias'
+        );
+
+
+    const observacao =
+        document.getElementById(
+            'observacaoGeral'
+        );
+
+
+    const itensPendentes = [];
+
+
+    checkboxes.forEach(
+        checkbox => {
+
+            if (!checkbox.checked) {
+
+                const item =
+                    checkbox.closest(
+                        '.item'
+                    );
+
+
+                const nome =
+                    item.querySelector(
+                        '.item-name'
+                    ).innerText;
+
+
+                itensPendentes.push(
+                    nome
+                );
+
+            }
+
+        }
+    );
+
+
+    /* -----------------------------------------
+       LISTA DE PENDÊNCIAS
+    ----------------------------------------- */
+
+    container.innerHTML = '';
+
+
+    if (
+        itensPendentes.length === 0
+    ) {
+
+        container.innerHTML = `
+            <div class="status ok">
+                ✓ TODOS OS ITENS FORAM CONFERIDOS
+            </div>
+        `;
+
+    } else {
+
+
+        itensPendentes.forEach(
+            (nome, index) => {
+
+                const div =
+                    document.createElement(
+                        'div'
+                    );
+
+
+                div.className =
+                    'pending-item';
+
+
+                div.innerHTML = `
+                    <div class="pending-name">
+                        ⚠ ${nome}
+                    </div>
+
+                    <textarea
+                        id="pendencia-${index}"
+                        placeholder="Informe a quantidade em falta ou observação..."
+                    ></textarea>
+                `;
+
+
+                container.appendChild(
+                    div
+                );
 
             }
         );
 
-    });
-
-}
-
-configurarCheckboxes();
+    }
 
 
-/* ================================================================
-   MARCAR / DESMARCAR TUDO
-================================================================ */
+    /* -----------------------------------------
+       CAMPO OBSERVAÇÃO AUTOMÁTICO
+    ----------------------------------------- */
 
-function marcarTudo() {
+    if (
+        itensPendentes.length > 0
+    ) {
 
-    const checkboxes =
-        document.querySelectorAll('.check-item');
-
-    const todosMarcados =
-        Array.from(checkboxes)
-        .every(function(item) {
-            return item.checked;
-        });
-
-    checkboxes.forEach(function(item) {
-
-        item.checked = !todosMarcados;
-
-    });
-
-    atualizarPendencias();
-    atualizarBotaoMarcar();
-}
-
-
-function atualizarBotaoMarcar() {
-
-    const checkboxes =
-        document.querySelectorAll('.check-item');
-
-    const todosMarcados =
-        Array.from(checkboxes)
-        .every(function(item) {
-            return item.checked;
-        });
-
-    const botao =
-        document.getElementById('btnMarcar');
-
-    if (todosMarcados) {
-
-        botao.textContent =
-            'DESMARCAR TUDO';
+        observacao.value =
+            'ITENS NÃO MARCADOS:\n\n' +
+            itensPendentes
+                .map(
+                    (item, index) =>
+                        (index + 1) +
+                        '. ' +
+                        item
+                )
+                .join('\n');
 
     } else {
 
-        botao.textContent =
-            'MARCAR TUDO';
+        observacao.value =
+            'ITENS NÃO MARCADOS:\n\n' +
+            'NENHUM — TODOS OS ITENS FORAM MARCADOS.';
 
     }
 
-}
 
+    /* -----------------------------------------
+       STATUS
+    ----------------------------------------- */
 
-/* ================================================================
-   VALIDAÇÃO DO ENFERMEIRO
-================================================================ */
-
-function validarEnfermeiro() {
-
-    const enfermeiro =
-        document.getElementById('enfermeiro')
-        .value
-        .trim();
-
-    const partes =
-        enfermeiro
-        .split(/\s+/)
-        .filter(Boolean);
-
-    if (partes.length < 2) {
-
-        alert(
-            'Informe o nome completo do enfermeiro.'
+    const status =
+        document.getElementById(
+            'status'
         );
 
-        document
-            .getElementById('enfermeiro')
-            .focus();
 
-        return false;
+    const botao =
+        document.getElementById(
+            'btnMarcar'
+        );
+
+
+    const btnPDF =
+        document.getElementById(
+            'btnPDF'
+        );
+
+
+    const btnWhatsApp =
+        document.getElementById(
+            'btnWhatsApp'
+        );
+
+
+    if (
+        itensPendentes.length === 0
+    ) {
+
+        status.className =
+            'status ok';
+
+
+        status.innerHTML =
+            '✓ TODOS OS ITENS FORAM MARCADOS — CHECKLIST PRONTO PARA FINALIZAR';
+
+
+        botao.innerHTML =
+            '↩ DESMARCAR TUDO';
+
+
+        btnPDF.disabled =
+            false;
+
+
+        btnWhatsApp.disabled =
+            false;
+
+    } else {
+
+        status.className =
+            'status pending';
+
+
+        status.innerHTML =
+            '⚠ ' +
+            itensPendentes.length +
+            ' ITEM(NS) PENDENTE(S) — FINALIZAÇÃO BLOQUEADA';
+
+
+        botao.innerHTML =
+            '✓ MARCAR TUDO';
+
+
+        btnPDF.disabled =
+            true;
+
+
+        btnWhatsApp.disabled =
+            true;
+
     }
 
-    return true;
 }
 
 
-/* ================================================================
-   VALIDAÇÃO GERAL
-================================================================ */
+/* =====================================================
+   PEGAR PLACA
+===================================================== */
 
-function validarDados() {
+function obterPlaca() {
+
+    const placaSelecionada =
+        document.querySelector(
+            'input[name="placa"]:checked'
+        );
+
+
+    if (!placaSelecionada) {
+        return '';
+    }
+
+
+    return placaSelecionada.value;
+
+}
+
+
+/* =====================================================
+   VALIDAÇÃO
+===================================================== */
+
+function validarFormulario() {
+
+
+    if (
+        aplicativoFinalizado
+    ) {
+
+        alert(
+            'CHECAGEM CONCLUÍDA. O aplicativo está bloqueado. Feche a tela e abra novamente o aplicativo para uma nova checagem.'
+        );
+
+
+        return false;
+
+    }
+
 
     const placa =
-        document.getElementById('placa').value;
+        obterPlaca();
 
-    const coren =
-        document.getElementById('coren')
-        .value
-        .trim();
 
     if (!placa) {
 
@@ -1383,16 +1892,82 @@ function validarDados() {
             'Selecione a placa da ambulância.'
         );
 
+
         document
-            .getElementById('placa')
+            .getElementById(
+                'placaQFS'
+            )
             .focus();
 
+
         return false;
+
     }
 
-    if (!validarEnfermeiro()) {
+
+    const enfermeiro =
+        document
+        .getElementById(
+            'enfermeiro'
+        )
+        .value
+        .trim();
+
+
+    const coren =
+        document
+        .getElementById(
+            'coren'
+        )
+        .value
+        .trim();
+
+
+    if (!enfermeiro) {
+
+        alert(
+            'Informe o nome do enfermeiro.'
+        );
+
+
+        document
+            .getElementById(
+                'enfermeiro'
+            )
+            .focus();
+
+
         return false;
+
     }
+
+
+    const partes =
+        enfermeiro.split(
+            /\s+/
+        );
+
+
+    if (
+        partes.length < 2
+    ) {
+
+        alert(
+            'Digite o nome completo do enfermeiro.'
+        );
+
+
+        document
+            .getElementById(
+                'enfermeiro'
+            )
+            .focus();
+
+
+        return false;
+
+    }
+
 
     if (!coren) {
 
@@ -1400,325 +1975,85 @@ function validarDados() {
             'Informe o número do COREN-PB.'
         );
 
+
         document
-            .getElementById('coren')
+            .getElementById(
+                'coren'
+            )
             .focus();
 
+
         return false;
+
     }
+
+
+    if (
+        !todosItensMarcados()
+    ) {
+
+        alert(
+            'Não é possível concluir a checagem enquanto houver itens sem marcação.'
+        );
+
+
+        atualizarPendencias();
+
+
+        return false;
+
+    }
+
 
     return true;
+
 }
 
 
-/* ================================================================
-   TORPEDOS PENDENTES
-================================================================ */
+/* =====================================================
+   BLOQUEAR VISUALMENTE
+===================================================== */
 
-function obterPendenciasTorpedos() {
+function bloquearVisualmente() {
 
-    const pendencias = [];
-
-    const ar =
-        document
-        .getElementById('arComprimido')
-        .value
-        .trim();
-
-    const oxigenio =
-        document
-        .getElementById('oxigenio')
-        .value
-        .trim();
-
-    const movel =
-        document
-        .getElementById('torpedoMovel')
-        .value
-        .trim();
+    aplicativoFinalizado =
+        true;
 
 
-    if (!ar) {
-
-        pendencias.push(
-            'CONTROLE DE TORPEDO — AR COMPRIMIDO: litros não informados'
+    const campos =
+        document.querySelectorAll(
+            'input, textarea, select, button'
         );
 
-    }
 
+    campos.forEach(
+        campo => {
 
-    if (!oxigenio) {
-
-        pendencias.push(
-            'CONTROLE DE TORPEDO — O₂ / OXIGÊNIO: litros não informados'
-        );
-
-    }
-
-
-    if (!movel) {
-
-        pendencias.push(
-            'CONTROLE DE TORPEDO — TORPEDO MÓVEL DE O₂: litros não informados'
-        );
-
-    }
-
-    return pendencias;
-}
-
-
-/* ================================================================
-   ATUALIZAR PENDÊNCIAS E OBSERVAÇÕES
-================================================================ */
-
-function atualizarPendencias() {
-
-    const pendencias = [];
-
-    const checkboxes =
-        document.querySelectorAll('.check-item');
-
-
-    /* ITENS NÃO MARCADOS */
-
-    checkboxes.forEach(function(item) {
-
-        if (!item.checked) {
-
-            pendencias.push(
-                item.dataset.nome
-            );
+            campo.disabled =
+                true;
 
         }
-
-    });
-
-
-    /* CAMPOS DO ITEM 8 */
-
-    const pendenciasTorpedos =
-        obterPendenciasTorpedos();
-
-    pendenciasTorpedos.forEach(function(item) {
-
-        pendencias.push(item);
-
-    });
+    );
 
 
-    /* LISTA VISUAL */
-
-    const lista =
-        document.getElementById('listaPendencias');
-
-    lista.innerHTML = '';
-
-
-    if (pendencias.length === 0) {
-
-        const li =
-            document.createElement('li');
-
-        li.textContent =
-            'Nenhuma pendência identificada.';
-
-        lista.appendChild(li);
-
-    } else {
-
-        pendencias.forEach(function(item) {
-
-            const li =
-                document.createElement('li');
-
-            li.textContent = item;
-
-            lista.appendChild(li);
-
-        });
-
-    }
+    document
+        .getElementById(
+            'telaFinalizada'
+        )
+        .style.display =
+        'flex';
 
 
-    /* OBSERVAÇÃO AUTOMÁTICA */
-
-    const observacao =
-        document.getElementById('observacao');
-
-    if (pendencias.length === 0) {
-
-        observacao.value =
-            'NENHUMA PENDÊNCIA. TODOS OS ITENS FORAM MARCADOS E OS CAMPOS DO CONTROLE DE TORPEDO FORAM PREENCHIDOS.';
-
-    } else {
-
-        observacao.value =
-            'ITENS NÃO MARCADOS / CAMPOS NÃO PREENCHIDOS:\n\n' +
-            pendencias
-            .map(function(item) {
-                return '• ' + item;
-            })
-            .join('\n');
-
-    }
+    document.body.classList.add(
+        'app-bloqueado'
+    );
 
 }
 
 
-/* ================================================================
-   GERAR TEXTO PARA WHATSAPP
-================================================================ */
-
-function gerarMensagem() {
-
-    const placa =
-        document.getElementById('placa').value;
-
-    const enfermeiro =
-        document.getElementById('enfermeiro')
-        .value
-        .trim();
-
-    const coren =
-        document.getElementById('coren')
-        .value
-        .trim();
-
-    const agora =
-        new Date();
-
-    const data =
-        agora.toLocaleDateString('pt-BR');
-
-    const hora =
-        agora.toLocaleTimeString('pt-BR');
-
-
-    const checkboxes =
-        document.querySelectorAll('.check-item');
-
-
-    const pendencias = [];
-
-
-    checkboxes.forEach(function(item) {
-
-        if (!item.checked) {
-
-            pendencias.push(
-                item.dataset.nome
-            );
-
-        }
-
-    });
-
-
-    const pendenciasTorpedos =
-        obterPendenciasTorpedos();
-
-
-    pendenciasTorpedos.forEach(function(item) {
-
-        pendencias.push(item);
-
-    });
-
-
-    let texto =
-        'CHECK LIST — AMBULÂNCIA TIPO A\n\n';
-
-    texto +=
-        'PREFEITURA MUNICIPAL DE CURRAL DE CIMA\n';
-
-    texto +=
-        'SECRETARIA MUNICIPAL DE SAÚDE\n\n';
-
-    texto +=
-        'DATA: ' + data + '\n';
-
-    texto +=
-        'HORA: ' + hora + '\n';
-
-    texto +=
-        'PLACA: ' + placa + '\n';
-
-    texto +=
-        'ENFERMEIRO: ' + enfermeiro + '\n';
-
-    texto +=
-        'COREN-PB: ' + coren + '\n\n';
-
-
-    texto +=
-        'RESULTADO DA CHECAGEM:\n';
-
-
-    if (pendencias.length === 0) {
-
-        texto +=
-            'TODOS OS ITENS CONFERIDOS.\n\n';
-
-    } else {
-
-        texto +=
-            'PENDÊNCIAS:\n';
-
-        pendencias.forEach(function(item) {
-
-            texto +=
-                '• ' + item + '\n';
-
-        });
-
-        texto += '\n';
-
-    }
-
-
-    texto +=
-        'CONTROLE DE TORPEDO:\n';
-
-    texto +=
-        'AR COMPRIMIDO: ' +
-        (
-            document.getElementById('arComprimido').value
-            || 'NÃO INFORMADO'
-        ) +
-        ' litros\n';
-
-    texto +=
-        'O₂ — OXIGÊNIO: ' +
-        (
-            document.getElementById('oxigenio').value
-            || 'NÃO INFORMADO'
-        ) +
-        ' litros\n';
-
-    texto +=
-        'TORPEDO MÓVEL DE O₂: ' +
-        (
-            document.getElementById('torpedoMovel').value
-            || 'NÃO INFORMADO'
-        ) +
-        ' litros\n\n';
-
-
-    texto +=
-        'OBSERVAÇÕES:\n';
-
-    texto +=
-        document.getElementById('observacao').value;
-
-
-    return texto;
-}
-
-
-/* ================================================================
-   FINALIZAR / BLOQUEAR APLICATIVO
-================================================================ */
+/* =====================================================
+   FINALIZAR APLICATIVO
+===================================================== */
 
 function finalizarAplicativo() {
 
@@ -1728,64 +2063,199 @@ function finalizarAplicativo() {
     );
 
 
-    const elementos =
-        document.querySelectorAll(
-            'input, select, textarea, button'
-        );
-
-
-    elementos.forEach(function(elemento) {
-
-        elemento.disabled = true;
-
-    });
-
-
-    document
-        .getElementById('telaFinalizada')
-        .style.display = 'flex';
+    bloquearVisualmente();
 
 }
 
 
-/* ================================================================
+/* =====================================================
    PDF
-================================================================ */
+===================================================== */
 
 function baixarPDF() {
 
-    if (!validarDados()) {
+
+    if (
+        !validarFormulario()
+    ) {
         return;
     }
 
-    atualizarPendencias();
+
+    /*
+       Abre a tela de impressão.
+       O usuário pode escolher:
+       "Salvar como PDF".
+    */
 
     window.print();
 
 }
 
 
-/* ================================================================
+/* =====================================================
+   APÓS SALVAR / FECHAR IMPRESSÃO
+===================================================== */
+
+window.addEventListener(
+    'afterprint',
+    function() {
+
+        if (
+            !aplicativoFinalizado
+        ) {
+
+            finalizarAplicativo();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
    WHATSAPP
-================================================================ */
+===================================================== */
 
 function compartilharWhatsApp() {
 
-    if (!validarDados()) {
+
+    if (
+        !validarFormulario()
+    ) {
         return;
     }
 
-    atualizarPendencias();
+
+    const placa =
+        obterPlaca();
 
 
-    const mensagem =
-        gerarMensagem();
+    const enfermeiro =
+        document
+        .getElementById(
+            'enfermeiro'
+        )
+        .value
+        .trim();
+
+
+    const coren =
+        document
+        .getElementById(
+            'coren'
+        )
+        .value
+        .trim();
+
+
+    const agora =
+        new Date();
+
+
+    const data =
+        agora.toLocaleDateString(
+            'pt-BR'
+        );
+
+
+    const hora =
+        agora.toLocaleTimeString(
+            'pt-BR',
+            {
+                hour: '2-digit',
+                minute: '2-digit'
+            }
+        );
+
+
+    const total =
+        checkboxes.length;
+
+
+    const conferidos =
+        Array.from(
+            checkboxes
+        )
+        .filter(
+            checkbox =>
+                checkbox.checked
+        )
+        .length;
+
+
+    const observacao =
+        document
+        .getElementById(
+            'observacaoGeral'
+        )
+        .value
+        .trim();
+
+
+    let mensagem =
+        '🚑 *CHECK LIST — AMBULÂNCIA TIPO A*';
+
+
+    mensagem +=
+        '\n\n🏛️ Prefeitura Municipal de Curral de Cima';
+
+
+    mensagem +=
+        '\n🏥 Secretaria Municipal de Saúde';
+
+
+    mensagem +=
+        '\n\n🚑 Placa: ' +
+        placa;
+
+
+    mensagem +=
+        '\n📅 Data: ' +
+        data;
+
+
+    mensagem +=
+        '\n⏰ Horário: ' +
+        hora;
+
+
+    mensagem +=
+        '\n👨‍⚕️ Enfermeiro: ' +
+        enfermeiro;
+
+
+    mensagem +=
+        '\n🪪 COREN-PB: ' +
+        coren;
+
+
+    mensagem +=
+        '\n\n✅ Itens conferidos: ' +
+        conferidos +
+        '/' +
+        total;
+
+
+    mensagem +=
+        '\n\n🔒 CHECAGEM CONCLUÍDA';
+
+
+    mensagem +=
+        '\n\n📝 Observações:\n' +
+        observacao;
 
 
     const url =
         'https://wa.me/?text=' +
-        encodeURIComponent(mensagem);
+        encodeURIComponent(
+            mensagem
+        );
 
+
+    /*
+       Abre o WhatsApp.
+    */
 
     window.open(
         url,
@@ -1793,110 +2263,163 @@ function compartilharWhatsApp() {
     );
 
 
+    /*
+       Depois de compartilhar,
+       bloqueia definitivamente
+       esta sessão do aplicativo.
+    */
+
     finalizarAplicativo();
 
 }
 
 
-/* ================================================================
+/* =====================================================
    NOVA CHECAGEM
-================================================================ */
+===================================================== */
 
 function novaChecagem() {
 
+    /*
+       Esta função NÃO inicia mais uma
+       checagem depois da conclusão.
+
+       O usuário deverá fechar a tela/aba
+       e abrir novamente o aplicativo.
+    */
+
     if (
-        sessionStorage.getItem(
-            'checklistFinalizado'
-        ) === 'sim'
+        aplicativoFinalizado
     ) {
 
         alert(
-            'A checagem já foi concluída. Feche esta tela e abra novamente o aplicativo para iniciar uma nova checagem.'
+            'CHECAGEM CONCLUÍDA. Feche esta tela e abra novamente o aplicativo para iniciar uma nova checagem.'
         );
 
+
+        return;
+
+    }
+
+
+    const confirmar =
+        confirm(
+            'Deseja iniciar uma nova checagem? Todos os dados preenchidos serão apagados.'
+        );
+
+
+    if (!confirmar) {
         return;
     }
 
 
-    if (
-        confirm(
-            'Deseja iniciar uma nova checagem? Os dados atuais serão apagados.'
+    limparFormulario();
+
+}
+
+
+/* =====================================================
+   LIMPAR FORMULÁRIO
+===================================================== */
+
+function limparFormulario() {
+
+
+    document
+        .getElementById(
+            'enfermeiro'
         )
-    ) {
+        .value = '';
 
-        location.reload();
 
-    }
+    document
+        .getElementById(
+            'coren'
+        )
+        .value = '';
+
+
+    document
+        .getElementById(
+            'arComprimido'
+        )
+        .value = '';
+
+
+    document
+        .getElementById(
+            'oxigenio'
+        )
+        .value = '';
+
+
+    document
+        .getElementById(
+            'torpedoMovel'
+        )
+        .value = '';
+
+
+    document
+        .querySelectorAll(
+            'input[name="placa"]'
+        )
+        .forEach(
+            radio => {
+
+                radio.checked =
+                    false;
+
+            }
+        );
+
+
+    checkboxes.forEach(
+        checkbox => {
+
+            checkbox.checked =
+                false;
+
+        }
+    );
+
+
+    atualizarPendencias();
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 
 }
 
 
-/* ================================================================
-   VERIFICAR SE JÁ FOI FINALIZADO
-================================================================ */
-
-function verificarFinalizacao() {
-
-    if (
-        sessionStorage.getItem(
-            'checklistFinalizado'
-        ) === 'sim'
-    ) {
-
-        const elementos =
-            document.querySelectorAll(
-                'input, select, textarea, button'
-            );
-
-
-        elementos.forEach(function(elemento) {
-
-            elemento.disabled = true;
-
-        });
-
-
-        document
-            .getElementById('telaFinalizada')
-            .style.display = 'flex';
-
-    }
-
-}
-
-
-/* ================================================================
+/* =====================================================
    INICIALIZAÇÃO
-================================================================ */
+===================================================== */
 
-document.addEventListener(
-    'DOMContentLoaded',
-    function() {
-
-        atualizarPendencias();
-
-        atualizarBotaoMarcar();
-
-        verificarFinalizacao();
-
-    }
-);
+atualizarPendencias();
 
 
-/* ================================================================
-   APÓS IMPRESSÃO
-================================================================ */
+/*
+   Se a sessão já estiver finalizada,
+   mantém tudo bloqueado.
+*/
 
-window.addEventListener(
-    'afterprint',
-    function() {
+if (
+    sessionStorage.getItem(
+        'checklistFinalizado'
+    ) === 'sim'
+) {
 
-        finalizarAplicativo();
+    bloquearVisualmente();
 
-    }
-);
+}
 
 </script>
 
+
 </body>
+
 </html>

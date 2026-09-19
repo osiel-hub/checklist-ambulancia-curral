@@ -43,7 +43,8 @@ body {
     justify-content: center;
 }
 
-/* ÁREA DO BRASÃO */
+/* ================= BRASÃO ================= */
+
 .brasao {
     width: 150px;
     height: 150px;
@@ -59,6 +60,7 @@ body {
 }
 
 /* IMAGEM OFICIAL */
+
 .brasao img {
     width: 150px;
     height: 150px;
@@ -67,25 +69,28 @@ body {
 }
 
 /*
-   SUBSTITUI VISUALMENTE "NOTA OFICIAL"
-   POR "CURRAL DE CIMA"
+   SUBSTITUI APENAS A ÁREA
+   ONDE APARECE "NOTA OFICIAL"
 */
+
 .brasao-substituicao {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 17px;
-    height: 30px;
+    top: 108px;
+    height: 18px;
     background: #eeeeee;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #1d2d50;
-    font-size: 16px;
+    font-size: 9px;
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
 }
+
+/* NOME ABAIXO DO BRASÃO */
 
 .nome-curral {
     font-size: 18px;
@@ -480,7 +485,6 @@ button:disabled {
                     alt="Brasão Oficial de Curral de Cima"
                 >
 
-                <!-- SUBSTITUIÇÃO DE NOTA OFICIAL -->
                 <div class="brasao-substituicao">
                     CURRAL DE CIMA
                 </div>
@@ -628,10 +632,7 @@ button:disabled {
 
     </div>
 
-
-    <!-- ========================================================= -->
-    <!-- 1 - VENTILAÇÃO E REANIMAÇÃO -->
-    <!-- ========================================================= -->
+    <!-- ================= 1 - VENTILAÇÃO ================= -->
 
     <div class="categoria">
 
@@ -686,10 +687,7 @@ button:disabled {
 
     </div>
 
-
-    <!-- ========================================================= -->
-    <!-- 2 - FLUIDOTERAPIA E ACESSO VENOSO -->
-    <!-- ========================================================= -->
+    <!-- ================= 2 - FLUIDOTERAPIA ================= -->
 
     <div class="categoria">
 
@@ -771,10 +769,7 @@ button:disabled {
 
     </div>
 
-
-    <!-- ========================================================= -->
-    <!-- 3 - OXIGENOTERAPIA E VIAS AÉREAS -->
-    <!-- ========================================================= -->
+    <!-- ================= 3 - OXIGENOTERAPIA ================= -->
 
     <div class="categoria">
 
@@ -820,10 +815,7 @@ button:disabled {
 
     </div>
 
-
-    <!-- ========================================================= -->
-    <!-- 4 - MONITORIZAÇÃO E AVALIAÇÃO -->
-    <!-- ========================================================= -->
+    <!-- ================= 4 - MONITORIZAÇÃO ================= -->
 
     <div class="categoria">
 
@@ -873,10 +865,7 @@ button:disabled {
 
     </div>
 
-
-    <!-- ========================================================= -->
-    <!-- 5 - TRAUMA E IMOBILIZAÇÃO -->
-    <!-- ========================================================= -->
+    <!-- ================= 5 - TRAUMA ================= -->
 
     <div class="categoria">
 
@@ -953,10 +942,7 @@ button:disabled {
 
     </div>
 
-
-    <!-- ========================================================= -->
-    <!-- 6 - PARTO E CUIDADOS GERAIS -->
-    <!-- ========================================================= -->
+    <!-- ================= 6 - PARTO ================= -->
 
     <div class="categoria">
 
@@ -1011,10 +997,7 @@ button:disabled {
 
     </div>
 
-
-    <!-- ========================================================= -->
-    <!-- 7 - PROTEÇÃO E HIGIENE -->
-    <!-- ========================================================= -->
+    <!-- ================= 7 - PROTEÇÃO ================= -->
 
     <div class="categoria">
 
@@ -1087,10 +1070,7 @@ button:disabled {
 
     </div>
 
-
-    <!-- ========================================================= -->
-    <!-- 8 - CONTROLE DE TORPEDO -->
-    <!-- ========================================================= -->
+    <!-- ================= 8 - TORPEDOS ================= -->
 
     <div class="categoria">
 
@@ -1117,7 +1097,6 @@ button:disabled {
 
             </div>
 
-
             <div class="torpedo-linha">
 
                 <label for="oxigenio">
@@ -1134,7 +1113,6 @@ button:disabled {
                 >
 
             </div>
-
 
             <div class="torpedo-linha">
 
@@ -1157,10 +1135,7 @@ button:disabled {
 
     </div>
 
-
-    <!-- ========================================================= -->
-    <!-- PENDÊNCIAS -->
-    <!-- ========================================================= -->
+    <!-- ================= PENDÊNCIAS ================= -->
 
     <div class="pendencias">
 
@@ -1169,19 +1144,12 @@ button:disabled {
         </h3>
 
         <ul id="listaPendencias">
-
-            <li>
-                Nenhuma pendência identificada.
-            </li>
-
+            <li>Nenhuma pendência identificada.</li>
         </ul>
 
     </div>
 
-
-    <!-- ========================================================= -->
-    <!-- OBSERVAÇÃO -->
-    <!-- ========================================================= -->
+    <!-- ================= OBSERVAÇÕES ================= -->
 
     <div class="observacao-box">
 
@@ -1196,10 +1164,7 @@ button:disabled {
 
     </div>
 
-
-    <!-- ========================================================= -->
-    <!-- RODAPÉ -->
-    <!-- ========================================================= -->
+    <!-- ================= RODAPÉ ================= -->
 
     <div class="rodape">
 
@@ -1210,10 +1175,7 @@ button:disabled {
 
 </div>
 
-
-<!-- ============================================================= -->
-<!-- TELA DE CHECAGEM CONCLUÍDA -->
-<!-- ============================================================= -->
+<!-- ================= TELA FINALIZADA ================= -->
 
 <div id="telaFinalizada">
 
@@ -1245,7 +1207,6 @@ button:disabled {
 
 </div>
 
-
 <script>
 
 /* ================================================================
@@ -1256,13 +1217,9 @@ function atualizarDataHora() {
 
     const agora = new Date();
 
-    const data = agora.toLocaleDateString(
-        'pt-BR'
-    );
+    const data = agora.toLocaleDateString('pt-BR');
 
-    const hora = agora.toLocaleTimeString(
-        'pt-BR'
-    );
+    const hora = agora.toLocaleTimeString('pt-BR');
 
     document.getElementById('dataHora').textContent =
         'DATA: ' + data + '  |  HORA: ' + hora;
@@ -1509,7 +1466,7 @@ function atualizarPendencias() {
         document.querySelectorAll('.check-item');
 
 
-    /* ITENS NÃO MARCADOS */
+    /* SOMENTE ITENS NÃO MARCADOS */
 
     checkboxes.forEach(function(item) {
 
@@ -1524,7 +1481,7 @@ function atualizarPendencias() {
     });
 
 
-    /* CAMPOS DE QUANTIDADE EM LITROS DO ITEM 8 */
+    /* SOMENTE QUANTIDADES EM LITROS NÃO PREENCHIDAS */
 
     const pendenciasTorpedos =
         obterPendenciasTorpedos();
@@ -1536,7 +1493,7 @@ function atualizarPendencias() {
     });
 
 
-    /* LISTA VISUAL */
+    /* LISTA DE PENDÊNCIAS */
 
     const lista =
         document.getElementById('listaPendencias');
@@ -1571,9 +1528,8 @@ function atualizarPendencias() {
 
 
     /* ============================================================
-       OBSERVAÇÃO:
-       SOMENTE AS PENDÊNCIAS SÃO MOSTRADAS.
-       SE NÃO HOUVER PENDÊNCIA, FICA VAZIO.
+       OBSERVAÇÕES
+       SOMENTE O QUE ESTÁ PENDENTE APARECE AQUI.
     ============================================================ */
 
     const observacao =
@@ -1625,13 +1581,10 @@ function gerarMensagem() {
     const hora =
         agora.toLocaleTimeString('pt-BR');
 
-
     const checkboxes =
         document.querySelectorAll('.check-item');
 
-
     const pendencias = [];
-
 
     checkboxes.forEach(function(item) {
 
@@ -1645,17 +1598,14 @@ function gerarMensagem() {
 
     });
 
-
     const pendenciasTorpedos =
         obterPendenciasTorpedos();
-
 
     pendenciasTorpedos.forEach(function(item) {
 
         pendencias.push(item);
 
     });
-
 
     let texto =
         'CHECK LIST — AMBULÂNCIA TIPO A\n\n';
@@ -1681,10 +1631,8 @@ function gerarMensagem() {
     texto +=
         'COREN-PB: ' + coren + '\n\n';
 
-
     texto +=
         'RESULTADO DA CHECAGEM:\n';
-
 
     if (pendencias.length === 0) {
 
@@ -1706,7 +1654,6 @@ function gerarMensagem() {
         texto += '\n';
 
     }
-
 
     texto +=
         'CONTROLE DE TORPEDO:\n';
@@ -1735,13 +1682,11 @@ function gerarMensagem() {
         ) +
         ' litros\n\n';
 
-
     texto +=
         'OBSERVAÇÕES:\n';
 
     texto +=
         document.getElementById('observacao').value;
-
 
     return texto;
 }
@@ -1758,19 +1703,16 @@ function finalizarAplicativo() {
         'sim'
     );
 
-
     const elementos =
         document.querySelectorAll(
             'input, select, textarea, button'
         );
-
 
     elementos.forEach(function(elemento) {
 
         elemento.disabled = true;
 
     });
-
 
     document
         .getElementById('telaFinalizada')
@@ -1808,21 +1750,17 @@ function compartilharWhatsApp() {
 
     atualizarPendencias();
 
-
     const mensagem =
         gerarMensagem();
-
 
     const url =
         'https://wa.me/?text=' +
         encodeURIComponent(mensagem);
 
-
     window.open(
         url,
         '_blank'
     );
-
 
     finalizarAplicativo();
 
@@ -1847,7 +1785,6 @@ function novaChecagem() {
 
         return;
     }
-
 
     if (
         confirm(
@@ -1879,13 +1816,11 @@ function verificarFinalizacao() {
                 'input, select, textarea, button'
             );
 
-
         elementos.forEach(function(elemento) {
 
             elemento.disabled = true;
 
         });
-
 
         document
             .getElementById('telaFinalizada')

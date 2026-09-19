@@ -3,967 +3,544 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#17365d">
-<title>Checklist Ambulância Tipo A — Curral de Cima</title>
+<title>Checklist Ambulância - Curral de Cima</title>
+
 <style>
-:root {
-  --blue:#17365d; --yellow:#f4d21f; --green:#0c9b62; --red:#c62828;
-  --bg:#f4f6f8; --line:#d8dee6; --text:#17202a; --muted:#66717e;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f1f5f9;
+  color:#172033;
 }
-* { box-sizing:border-box; }
-body { margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:var(--text); }
-.app { max-width:1100px; margin:0 auto; padding:16px; }
-.header {
-  background:white; border-radius:16px; padding:18px; box-shadow:0 2px 10px rgba(0,0,0,.08);
-  display:flex; align-items:center; gap:16px; border-top:7px solid var(--blue);
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:15px;
 }
-.logo { width:86px; height:86px; object-fit:contain; border-radius:50%; }
-.header h1 { margin:0; color:var(--blue); font-size:23px; }
-.header h2 { margin:5px 0 0; font-size:15px; font-weight:700; color:#333; }
-.header p { margin:4px 0 0; color:var(--muted); font-size:13px; }
-.info {
-  background:white; margin-top:14px; padding:14px; border-radius:14px; box-shadow:0 2px 8px rgba(0,0,0,.06);
-  display:grid; grid-template-columns:1fr 1fr 1.4fr; gap:12px;
+.header{
+  background:#075985;
+  color:white;
+  border-radius:12px;
+  padding:20px;
+  text-align:center;
 }
-.field label { display:block; font-size:12px; font-weight:700; color:var(--muted); margin-bottom:5px; }
-.field input {
-  width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:9px; font-size:16px; background:#fafbfc;
+.header h1{font-size:20px;margin:5px 0}
+.header h2{font-size:16px;margin:5px 0}
+.header p{margin:8px 0 0;font-size:13px}
+
+.card{
+  background:white;
+  margin-top:15px;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 2px 8px #0002;
 }
-.field input[readonly] { background:#eef2f6; }
-.actions {
-  margin:14px 0; display:flex; flex-wrap:wrap; gap:8px; align-items:center;
+
+input{
+  width:100%;
+  padding:12px;
+  border:1px solid #bbb;
+  border-radius:8px;
+  font-size:16px;
+  margin-top:5px;
 }
-button {
-  border:0; border-radius:9px; padding:11px 14px; font-weight:700; cursor:pointer; font-size:14px;
+
+.info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
-.primary { background:var(--blue); color:white; }
-.secondary { background:white; color:var(--blue); border:1px solid #b8c3d0; }
-.success { background:var(--green); color:white; }
-.danger { background:#fff0f0; color:var(--red); border:1px solid #e5aaaa; }
-.summary {
-  margin-left:auto; display:flex; gap:12px; align-items:center; font-size:13px; font-weight:700;
+
+.summary{
+  display:flex;
+  justify-content:space-around;
+  text-align:center;
+  font-weight:bold;
+  margin-top:15px;
 }
-.badge { padding:6px 10px; border-radius:20px; background:#edf2f7; }
-.badge.ok { color:#08774b; background:#e7f7ef; }
-.badge.no { color:#a91f1f; background:#fdeaea; }
-.table-wrap {
-  background:white; border-radius:14px; box-shadow:0 2px 8px rgba(0,0,0,.06); overflow:auto;
+.summary div{
+  background:#e2e8f0;
+  padding:10px;
+  border-radius:8px;
+  flex:1;
+  margin:3px;
 }
-table { width:100%; border-collapse:collapse; min-width:850px; }
-th { background:var(--blue); color:white; padding:10px; font-size:12px; text-align:left; position:sticky; top:0; z-index:2; }
-td { padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:middle; font-size:13px; }
-.category td {
-  background:#eaf0f6; color:var(--blue); font-weight:800; font-size:12px; letter-spacing:.2px;
-  padding:9px 10px;
+
+button{
+  border:0;
+  border-radius:8px;
+  padding:10px 14px;
+  font-weight:bold;
+  cursor:pointer;
 }
-.num { width:48px; text-align:center; color:var(--muted); }
-.qty { width:105px; text-align:center; font-weight:700; }
-.status { width:110px; white-space:nowrap; text-align:center; }
-.status-opt { display:inline-flex; align-items:center; justify-content:center; margin:0 3px; cursor:pointer; }
-.status-opt input { display:none; }
-.status-opt span {
-  width:34px; height:34px; border:2px solid #cbd3dc; border-radius:8px; display:inline-flex;
-  align-items:center; justify-content:center; font-size:20px; font-weight:800; background:#fff;
+
+.top-buttons{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:15px;
 }
-.status-opt.ok input:checked + span { background:#e7f7ef; border-color:var(--green); color:var(--green); }
-.status-opt.no input:checked + span { background:#fdeaea; border-color:var(--red); color:var(--red); }
-.obs { width:100%; border:1px solid var(--line); border-radius:7px; padding:8px; }
-.item-row.missing { background:#fff8f8; }
-.item-row.missing .obs { border:2px solid var(--red); }
-.item-row.missing .obs::placeholder { color:#b33; }
-.footer {
-  background:white; margin-top:14px; padding:14px; border-radius:14px; color:var(--muted); font-size:12px;
+.btn-ok{background:#16a34a;color:white}
+.btn-clear{background:#64748b;color:white}
+.btn-print{background:#0f766e;color:white}
+
+.category{
+  margin-top:18px;
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  overflow:hidden;
 }
-.print-only { display:none; }
-@media(max-width:700px) {
-  .header { align-items:flex-start; }
-  .logo { width:65px; height:65px; }
-  .header h1 { font-size:18px; }
-  .info { grid-template-columns:1fr; }
-  .summary { margin-left:0; width:100%; justify-content:flex-start; }
+.category-title{
+  background:#075985;
+  color:white;
+  padding:10px;
+  font-weight:bold;
 }
-@media print {
-  body { background:white; }
-  .app { max-width:none; padding:0; }
-  .header,.info,.table-wrap,.footer { box-shadow:none; }
-  .actions { display:none; }
-  .print-only { display:block; }
-  .table-wrap { overflow:visible; }
-  table { min-width:0; font-size:10px; }
-  th { position:static; }
-  td { padding:5px; font-size:10px; }
-  .obs { border:0; padding:0; }
-  .status-opt span { width:24px; height:24px; font-size:14px; }
+
+.item{
+  padding:12px;
+  border-top:1px solid #e2e8f0;
+  background:white;
+}
+.item-name{
+  font-weight:bold;
+  margin-bottom:8px;
+}
+.options{
+  display:flex;
+  gap:8px;
+}
+.sim,.nao{
+  flex:1;
+  background:#e2e8f0;
+  color:#172033;
+}
+.sim.selected{
+  background:#16a34a;
+  color:white;
+}
+.nao.selected{
+  background:#dc2626;
+  color:white;
+}
+.options button:disabled{
+  opacity:.35;
+  cursor:not-allowed;
+}
+
+.obs{
+  display:none;
+  margin-top:8px;
+}
+.obs.show{display:block}
+.obs textarea{
+  width:100%;
+  min-height:70px;
+  padding:8px;
+  border:1px solid #dc2626;
+  border-radius:8px;
+  resize:vertical;
+}
+
+@media(max-width:600px){
+  .info{grid-template-columns:1fr}
+  .summary{font-size:13px}
+}
+
+@media print{
+  .top-buttons,.options,.obs textarea{
+    display:none!important;
+  }
+  body{background:white}
+  .card,.category{box-shadow:none}
 }
 </style>
 </head>
+
 <body>
-<div class="app">
-  <header class="header">
-    <img class="logo" src="data:image/jpeg;base64,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" alt="Brasão de Curral de Cima">
-    <div>
-      <h1>PREFEITURA MUNICIPAL DE CURRAL DE CIMA</h1>
-      <h2>SECRETARIA MUNICIPAL DE SAÚDE</h2>
-      <h1 style="margin-top:8px;font-size:21px;">CHECK LIST — AMBULÂNCIA TIPO A</h1>
-      <p>Conferência rápida de materiais, equipamentos e itens da viatura.</p>
-    </div>
-  </header>
 
-  <section class="info">
-    <div class="field">
-      <label>DATA (automática)</label>
-      <input id="date" readonly>
-    </div>
-    <div class="field">
-      <label>HORA (automática)</label>
-      <input id="time" readonly>
-    </div>
-    <div class="field">
-      <label>PLACA DA AMBULÂNCIA</label>
-      <input id="plate" maxlength="8" placeholder="Ex.: ABC1D23" autocomplete="off" list="plateList">
-      <datalist id="plateList"></datalist>
-    </div>
-  </section>
+<div class="container">
 
-  <div class="actions">
-    <button class="success" onclick="markAll('ok')">✓ Marcar todos OK</button>
-    <button class="secondary" onclick="clearAll()">Limpar checklist</button>
-    <button class="primary" onclick="validateAndPrint()">🖨️ Salvar / Imprimir</button>
-    <div class="summary">
-      <span class="badge">Total: <b id="total">0</b></span>
-      <span class="badge ok">OK: <b id="okCount">0</b></span>
-      <span class="badge no">✕: <b id="noCount">0</b></span>
-    </div>
+<div class="header">
+  <div style="font-size:35px">🏥</div>
+  <h1>PREFEITURA MUNICIPAL DE CURRAL DE CIMA</h1>
+  <h2>SECRETARIA MUNICIPAL DE SAÚDE</h2>
+  <p>CHECK LIST — AMBULÂNCIA TIPO A</p>
+  <p id="dataHora"></p>
+</div>
+
+<div class="card">
+
+<div class="info">
+  <div>
+    <label><b>Placa da ambulância</b></label>
+    <input id="placa" placeholder="Digite a placa">
   </div>
 
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>ITEM</th>
-          <th>MATERIAL</th>
-          <th style="text-align:center">QTD.</th>
-          <th style="text-align:center">CONFERÊNCIA</th>
-          <th>OBSERVAÇÃO</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-        <tr class="category"><td colspan="5">COMPARTIMENTO COM TELA 01</td></tr>
-        <tr class="item-row" data-item="1">
-          <td class="num">1</td>
-          <td class="material">Ambu adulto</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_1" value="ok" onchange="setStatus(1, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_1" value="no" onchange="setStatus(1, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_1" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$1].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="2">
-          <td class="num">2</td>
-          <td class="material">Ambu pediátrico</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_2" value="ok" onchange="setStatus(2, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_2" value="no" onchange="setStatus(2, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_2" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$2].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="category"><td colspan="5">COMPARTIMENTO COM TELA 02</td></tr>
-        <tr class="item-row" data-item="3">
-          <td class="num">3</td>
-          <td class="material">SF 0,9% 500 mL</td>
-          <td class="qty">05</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_3" value="ok" onchange="setStatus(3, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_3" value="no" onchange="setStatus(3, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_3" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$3].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="4">
-          <td class="num">4</td>
-          <td class="material">Soro RL 500 mL</td>
-          <td class="qty">05</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_4" value="ok" onchange="setStatus(4, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_4" value="no" onchange="setStatus(4, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_4" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$4].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="5">
-          <td class="num">5</td>
-          <td class="material">SG 5% 500 mL</td>
-          <td class="qty">05</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_5" value="ok" onchange="setStatus(5, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_5" value="no" onchange="setStatus(5, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_5" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$5].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="6">
-          <td class="num">6</td>
-          <td class="material">Jelco 14, 16, 18, 20, 22 e 24</td>
-          <td class="qty">05 de cada</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_6" value="ok" onchange="setStatus(6, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_6" value="no" onchange="setStatus(6, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_6" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$6].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="7">
-          <td class="num">7</td>
-          <td class="material">Scalpe</td>
-          <td class="qty">05</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_7" value="ok" onchange="setStatus(7, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_7" value="no" onchange="setStatus(7, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_7" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$7].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="8">
-          <td class="num">8</td>
-          <td class="material">Seringas 01, 03, 05, 10 e 20 mL</td>
-          <td class="qty">05</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_8" value="ok" onchange="setStatus(8, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_8" value="no" onchange="setStatus(8, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_8" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$8].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="9">
-          <td class="num">9</td>
-          <td class="material">Equipo macrogotas</td>
-          <td class="qty">10</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_9" value="ok" onchange="setStatus(9, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_9" value="no" onchange="setStatus(9, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_9" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$9].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="10">
-          <td class="num">10</td>
-          <td class="material">Lâmina de bisturi</td>
-          <td class="qty">05</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_10" value="ok" onchange="setStatus(10, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_10" value="no" onchange="setStatus(10, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_10" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$10].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="category"><td colspan="5">COMPARTIMENTO COM TELA 03</td></tr>
-        <tr class="item-row" data-item="11">
-          <td class="num">11</td>
-          <td class="material">Máscara com reservatório adulta</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_11" value="ok" onchange="setStatus(11, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_11" value="no" onchange="setStatus(11, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_11" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$11].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="12">
-          <td class="num">12</td>
-          <td class="material">Máscara com reservatório infantil</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_12" value="ok" onchange="setStatus(12, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_12" value="no" onchange="setStatus(12, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_12" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$12].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="13">
-          <td class="num">13</td>
-          <td class="material">Cânula de Guedel</td>
-          <td class="qty">02</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_13" value="ok" onchange="setStatus(13, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_13" value="no" onchange="setStatus(13, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_13" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$13].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="14">
-          <td class="num">14</td>
-          <td class="material">Cateter nasal</td>
-          <td class="qty">05</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_14" value="ok" onchange="setStatus(14, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_14" value="no" onchange="setStatus(14, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_14" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$14].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="15">
-          <td class="num">15</td>
-          <td class="material">Látex / extensão de O₂</td>
-          <td class="qty">03</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_15" value="ok" onchange="setStatus(15, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_15" value="no" onchange="setStatus(15, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_15" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$15].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="16">
-          <td class="num">16</td>
-          <td class="material">Máscara de nebulização</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_16" value="ok" onchange="setStatus(16, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_16" value="no" onchange="setStatus(16, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_16" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$16].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="17">
-          <td class="num">17</td>
-          <td class="material">Máscara de Venturi</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_17" value="ok" onchange="setStatus(17, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_17" value="no" onchange="setStatus(17, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_17" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$17].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="category"><td colspan="5">MATERIAIS DE TRAUMA</td></tr>
-        <tr class="item-row" data-item="18">
-          <td class="num">18</td>
-          <td class="material">Manta térmica</td>
-          <td class="qty">02</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_18" value="ok" onchange="setStatus(18, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_18" value="no" onchange="setStatus(18, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_18" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$18].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="19">
-          <td class="num">19</td>
-          <td class="material">Protetor de queimados e evisceração</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_19" value="ok" onchange="setStatus(19, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_19" value="no" onchange="setStatus(19, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_19" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$19].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="20">
-          <td class="num">20</td>
-          <td class="material">Gaze</td>
-          <td class="qty">10</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_20" value="ok" onchange="setStatus(20, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_20" value="no" onchange="setStatus(20, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_20" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$20].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="21">
-          <td class="num">21</td>
-          <td class="material">Atadura</td>
-          <td class="qty">10</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_21" value="ok" onchange="setStatus(21, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_21" value="no" onchange="setStatus(21, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_21" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$21].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="category"><td colspan="5">COMPARTIMENTO FECHADO SUPERIOR</td></tr>
-        <tr class="item-row" data-item="22">
-          <td class="num">22</td>
-          <td class="material">Colcha</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_22" value="ok" onchange="setStatus(22, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_22" value="no" onchange="setStatus(22, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_22" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$22].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="23">
-          <td class="num">23</td>
-          <td class="material">Lençol descartável</td>
-          <td class="qty">10</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_23" value="ok" onchange="setStatus(23, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_23" value="no" onchange="setStatus(23, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_23" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$23].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="24">
-          <td class="num">24</td>
-          <td class="material">Kit parto</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_24" value="ok" onchange="setStatus(24, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_24" value="no" onchange="setStatus(24, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_24" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$24].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="25">
-          <td class="num">25</td>
-          <td class="material">Lençol</td>
-          <td class="qty">02</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_25" value="ok" onchange="setStatus(25, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_25" value="no" onchange="setStatus(25, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_25" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$25].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="26">
-          <td class="num">26</td>
-          <td class="material">Fralda descartável</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_26" value="ok" onchange="setStatus(26, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_26" value="no" onchange="setStatus(26, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_26" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$26].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="category"><td colspan="5">COMPARTIMENTO FECHADO INFERIOR 01</td></tr>
-        <tr class="item-row" data-item="27">
-          <td class="num">27</td>
-          <td class="material">Colar cervical: neonatal, infantil, P, M e G, regulável</td>
-          <td class="qty">01 de cada</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_27" value="ok" onchange="setStatus(27, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_27" value="no" onchange="setStatus(27, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_27" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$27].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="28">
-          <td class="num">28</td>
-          <td class="material">Coxins</td>
-          <td class="qty">01 par</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_28" value="ok" onchange="setStatus(28, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_28" value="no" onchange="setStatus(28, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_28" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$28].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="29">
-          <td class="num">29</td>
-          <td class="material">Luva P, M e G</td>
-          <td class="qty">01 de cada</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_29" value="ok" onchange="setStatus(29, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_29" value="no" onchange="setStatus(29, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_29" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$29].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="30">
-          <td class="num">30</td>
-          <td class="material">Máscara descartável</td>
-          <td class="qty">01 cx</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_30" value="ok" onchange="setStatus(30, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_30" value="no" onchange="setStatus(30, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_30" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$30].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="31">
-          <td class="num">31</td>
-          <td class="material">Estetoscópio e tensiômetro adulto</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_31" value="ok" onchange="setStatus(31, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_31" value="no" onchange="setStatus(31, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_31" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$31].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="32">
-          <td class="num">32</td>
-          <td class="material">Estetoscópio e tensiômetro infantil</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_32" value="ok" onchange="setStatus(32, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_32" value="no" onchange="setStatus(32, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_32" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$32].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="33">
-          <td class="num">33</td>
-          <td class="material">Esparadrapo</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_33" value="ok" onchange="setStatus(33, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_33" value="no" onchange="setStatus(33, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_33" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$33].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="34">
-          <td class="num">34</td>
-          <td class="material">Cuba rim</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_34" value="ok" onchange="setStatus(34, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_34" value="no" onchange="setStatus(34, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_34" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$34].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="35">
-          <td class="num">35</td>
-          <td class="material">Almotolia álcool</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_35" value="ok" onchange="setStatus(35, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_35" value="no" onchange="setStatus(35, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_35" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$35].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="item-row" data-item="36">
-          <td class="num">36</td>
-          <td class="material">Almotolia PVPI</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_36" value="ok" onchange="setStatus(36, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_36" value="no" onchange="setStatus(36, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_36" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$36].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="category"><td colspan="5">COMPARTIMENTO FECHADO INFERIOR 02</td></tr>
-        <tr class="item-row" data-item="37">
-          <td class="num">37</td>
-          <td class="material">KED adulto</td>
-          <td class="qty">01</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_37" value="ok" onchange="setStatus(37, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_37" value="no" onchange="setStatus(37, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_37" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$37].obs=this.value; persist()">
-          </td>
-        </tr>
-        <tr class="category"><td colspan="5">VIATURA</td></tr>
-        <tr class="item-row" data-item="38">
-          <td class="num">38</td>
-          <td class="material">Garrote</td>
-          <td class="qty">02</td>
-          <td class="status">
-            <label class="status-opt ok">
-              <input type="radio" name="item_38" value="ok" onchange="setStatus(38, 'ok')">
-              <span>✓</span>
-            </label>
-            <label class="status-opt no">
-              <input type="radio" name="item_38" value="no" onchange="setStatus(38, 'no')">
-              <span>✕</span>
-            </label>
-          </td>
-          <td class="obs-cell">
-            <input id="obs_38" class="obs" type="text" placeholder="Obrigatório se marcar ✕" oninput="state.items[$38].obs=this.value; persist()">
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="footer">
-    <b>Como usar:</b> informe a placa uma vez; a data e a hora são preenchidas automaticamente.
-    Marque <b>✓</b> quando o item estiver presente e conforme. Marque <b>✕</b> quando houver falta,
-    problema ou divergência — nesse caso, a observação é obrigatória. O navegador guarda a última
-    placa utilizada e o checklist fica salvo localmente no aparelho.
-    <div class="print-only" style="margin-top:12px;">
-      Responsável pela conferência: ____________________________________________
-      &nbsp;&nbsp; COREN: ____________________
-    </div>
+  <div>
+    <label><b>Responsável pela conferência</b></label>
+    <input id="responsavel" placeholder="Nome do responsável">
   </div>
 </div>
 
-<script>
-const initialItems = {"1": {"status": "", "obs": ""}, "2": {"status": "", "obs": ""}, "3": {"status": "", "obs": ""}, "4": {"status": "", "obs": ""}, "5": {"status": "", "obs": ""}, "6": {"status": "", "obs": ""}, "7": {"status": "", "obs": ""}, "8": {"status": "", "obs": ""}, "9": {"status": "", "obs": ""}, "10": {"status": "", "obs": ""}, "11": {"status": "", "obs": ""}, "12": {"status": "", "obs": ""}, "13": {"status": "", "obs": ""}, "14": {"status": "", "obs": ""}, "15": {"status": "", "obs": ""}, "16": {"status": "", "obs": ""}, "17": {"status": "", "obs": ""}, "18": {"status": "", "obs": ""}, "19": {"status": "", "obs": ""}, "20": {"status": "", "obs": ""}, "21": {"status": "", "obs": ""}, "22": {"status": "", "obs": ""}, "23": {"status": "", "obs": ""}, "24": {"status": "", "obs": ""}, "25": {"status": "", "obs": ""}, "26": {"status": "", "obs": ""}, "27": {"status": "", "obs": ""}, "28": {"status": "", "obs": ""}, "29": {"status": "", "obs": ""}, "30": {"status": "", "obs": ""}, "31": {"status": "", "obs": ""}, "32": {"status": "", "obs": ""}, "33": {"status": "", "obs": ""}, "34": {"status": "", "obs": ""}, "35": {"status": "", "obs": ""}, "36": {"status": "", "obs": ""}, "37": {"status": "", "obs": ""}, "38": {"status": "", "obs": ""}};
-const state = {
-  items: JSON.parse(JSON.stringify(initialItems)),
-  plate: localStorage.getItem('ambulancia_placa') || ''
-};
+<div class="top-buttons">
+  <button class="btn-ok" onclick="marcarTodos()">✓ Marcar todos SIM</button>
+  <button class="btn-clear" onclick="limpar()">Limpar checklist</button>
+  <button class="btn-print" onclick="imprimir()">🖨️ Salvar / Imprimir</button>
+</div>
 
-function nowBR() {
-  const d = new Date();
-  document.getElementById('date').value = d.toLocaleDateString('pt-BR');
-  document.getElementById('time').value = d.toLocaleTimeString('pt-BR');
+<div class="summary">
+  <div>Total<br><span id="total">0</span></div>
+  <div>SIM<br><span id="simCount">0</span></div>
+  <div>NÃO<br><span id="naoCount">0</span></div>
+</div>
+
+<div id="checklist"></div>
+
+</div>
+</div>
+
+<script>
+
+const categorias = [
+
+{
+nome:"COMPARTIMENTO COM TELA 01",
+itens:[
+"Ambu adulto — 01",
+"Ambu pediátrico — 01"
+]
+},
+
+{
+nome:"COMPARTIMENTO COM TELA 02",
+itens:[
+"SF 0,9% 500 mL — 05",
+"Soro RL 500 mL — 05",
+"SG 5% 500 mL — 05",
+"Jelco 14, 16, 18, 20, 22 e 24 — 05 de cada",
+"Scalpe — 05",
+"Seringas 01, 03, 05, 10 e 20 mL — 05 de cada",
+"Equipo macrogotas — 10",
+"Lâmina de bisturi — 05"
+]
+},
+
+{
+nome:"COMPARTIMENTO COM TELA 03",
+itens:[
+"Máscara com reservatório adulta — 01",
+"Máscara com reservatório infantil — 01",
+"Cânula de Guedel — 02",
+"Cateter nasal — 05",
+"Látex / extensão de O₂ — 03",
+"Máscara de nebulização — 01",
+"Máscara de Venturi — 01"
+]
+},
+
+{
+nome:"MONITORIZAÇÃO E AVALIAÇÃO",
+itens:[
+"Oxímetro — 01",
+"Termômetro — 01",
+"Estetoscópio adulto — 01",
+"Estetoscópio infantil — 01",
+"Tensiômetro adulto — 01",
+"Tensiômetro infantil — 01"
+]
+},
+
+{
+nome:"MATERIAIS DE TRAUMA",
+itens:[
+"Manta térmica — 02",
+"Protetor de queimados e evisceração — 01",
+"Gaze — 10",
+"Atadura — 10"
+]
+},
+
+{
+nome:"COMPARTIMENTO FECHADO SUPERIOR",
+itens:[
+"Colcha — 01",
+"Lençol descartável — 10",
+"Kit parto — 01",
+"Lençol — 02",
+"Fralda descartável — 01"
+]
+},
+
+{
+nome:"COMPARTIMENTO FECHADO INFERIOR 01",
+itens:[
+"Colar cervical: neonatal, infantil, P, M e G, regulável — 01 de cada",
+"Coxins — 01 par",
+"Luva P, M e G — 01 de cada",
+"Máscara descartável — 01 cx",
+"Esparadrapo — 01",
+"Cuba rim — 01",
+"Almotolia álcool — 01",
+"Almotolia PVPI — 01"
+]
+},
+
+{
+nome:"COMPARTIMENTO FECHADO INFERIOR 02",
+itens:[
+"KED adulto — 01"
+]
+},
+
+{
+nome:"VIATURA",
+itens:[
+"Garrote — 02"
+]
 }
-function normalizePlate(v) {
-  return v.toUpperCase().replace(/[^A-Z0-9]/g,'');
-}
-function loadPlates() {
-  const list = JSON.parse(localStorage.getItem('ambulancia_placas') || '[]');
-  const dl = document.getElementById('plateList');
-  dl.innerHTML = list.map(p => `<option value="${p}"></option>`).join('');
-}
-function persist() {
-  localStorage.setItem('ambulancia_checklist', JSON.stringify(state));
-  if(state.plate) {
-    localStorage.setItem('ambulancia_placa', state.plate);
-    let list = JSON.parse(localStorage.getItem('ambulancia_placas') || '[]');
-    list = [state.plate, ...list.filter(x => x !== state.plate)].slice(0,10);
-    localStorage.setItem('ambulancia_placas', JSON.stringify(list));
-    loadPlates();
-  }
-}
-function restore() {
-  const saved = JSON.parse(localStorage.getItem('ambulancia_checklist') || 'null');
-  if(saved && saved.items) state.items = saved.items;
-  state.plate = saved?.plate || localStorage.getItem('ambulancia_placa') || '';
-  document.getElementById('plate').value = state.plate;
-  for(const n in state.items) {
-    const s = state.items[n].status;
-    if(s) {
-      const el = document.querySelector(`input[name="item_${n}"][value="${s}"]`);
-      if(el) el.checked = true;
-      if(s === 'no') document.querySelector(`tr[data-item="${n}"]`).classList.add('missing');
-    }
-    const obs = document.getElementById('obs_'+n);
-    if(obs) obs.value = state.items[n].obs || '';
-  }
-  updateSummary();
-}
-function setStatus(num, status) {
-  state.items[num].status = status;
-  const row = document.querySelector(`tr[data-item="${num}"]`);
-  row.classList.toggle('missing', status === 'no');
-  const obs = document.getElementById('obs_'+num);
-  if(status === 'ok') {
-    // Mantém a observação, caso exista, para não apagar informação do usuário.
-    obs.placeholder = 'Opcional';
-  } else {
-    obs.placeholder = 'Obrigatório se marcar ✕';
-  }
-  persist(); updateSummary();
-}
-function updateSummary() {
-  const values = Object.values(state.items);
-  document.getElementById('total').textContent = values.length;
-  document.getElementById('okCount').textContent = values.filter(x => x.status === 'ok').length;
-  document.getElementById('noCount').textContent = values.filter(x => x.status === 'no').length;
-}
-function markAll(status) {
-  for(const n in state.items) {
-    state.items[n].status = status;
-    const radio = document.querySelector(`input[name="item_${n}"][value="${status}"]`);
-    if(radio) radio.checked = true;
-    const row = document.querySelector(`tr[data-item="${n}"]`);
-    row.classList.toggle('missing', status === 'no');
-  }
-  persist(); updateSummary();
-}
-function clearAll() {
-  if(!confirm('Limpar todas as marcações e observações?')) return;
-  state.items = JSON.parse(JSON.stringify(initialItems));
-  document.querySelectorAll('input[type=radio]').forEach(x => x.checked=false);
-  document.querySelectorAll('.obs').forEach(x => x.value='');
-  document.querySelectorAll('.item-row').forEach(x => x.classList.remove('missing'));
-  persist(); updateSummary();
-}
-function validateAndPrint() {
-  state.plate = normalizePlate(document.getElementById('plate').value);
-  document.getElementById('plate').value = state.plate;
-  if(!state.plate) {
-    alert('Informe a placa da ambulância antes de salvar.');
-    document.getElementById('plate').focus(); return;
-  }
-  let errors = [];
-  for(const n in state.items) {
-    const it = state.items[n];
-    if(it.status === 'no' && !String(it.obs || '').trim()) errors.push(n);
-  }
-  if(errors.length) {
-    alert('Preencha a observação dos itens marcados com ✕. Itens: ' + errors.join(', '));
-    document.getElementById('obs_'+errors[0]).focus(); return;
-  }
-  persist();
-  window.print();
-}
-document.getElementById('plate').addEventListener('input', e => {
-  state.plate = normalizePlate(e.target.value); e.target.value = state.plate; persist();
+
+];
+
+let respostas={};
+
+function criarChecklist(){
+
+const area=document.getElementById("checklist");
+area.innerHTML="";
+let total=0;
+
+categorias.forEach((categoria,ci)=>{
+
+const bloco=document.createElement("div");
+bloco.className="category";
+
+const titulo=document.createElement("div");
+titulo.className="category-title";
+titulo.textContent=categoria.nome;
+bloco.appendChild(titulo);
+
+categoria.itens.forEach((item,ii)=>{
+
+total++;
+
+const id=ci+"-"+ii;
+
+const div=document.createElement("div");
+div.className="item";
+
+div.innerHTML=`
+<div class="item-name">${item}</div>
+
+<div class="options">
+
+<button class="sim" id="sim-${id}"
+onclick="responder('${id}','SIM')">
+SIM
+</button>
+
+<button class="nao" id="nao-${id}"
+onclick="responder('${id}','NAO')">
+NÃO
+</button>
+
+</div>
+
+<div class="obs" id="obs-${id}">
+<textarea id="txt-${id}"
+placeholder="Digite a observação obrigatória..."></textarea>
+</div>
+`;
+
+bloco.appendChild(div);
+
 });
-nowBR(); setInterval(nowBR, 1000); loadPlates(); restore();
+
+area.appendChild(bloco);
+
+});
+
+document.getElementById("total").textContent=total;
+
+}
+
+function responder(id,resposta){
+
+const sim=document.getElementById("sim-"+id);
+const nao=document.getElementById("nao-"+id);
+const obs=document.getElementById("obs-"+id);
+const txt=document.getElementById("txt-"+id);
+
+if(respostas[id]===resposta){
+
+delete respostas[id];
+
+sim.classList.remove("selected");
+nao.classList.remove("selected");
+
+sim.disabled=false;
+nao.disabled=false;
+
+obs.classList.remove("show");
+txt.value="";
+
+}else{
+
+respostas[id]=resposta;
+
+if(resposta==="SIM"){
+
+sim.classList.add("selected");
+nao.classList.remove("selected");
+
+sim.disabled=false;
+nao.disabled=true;
+
+obs.classList.remove("show");
+txt.value="";
+
+}else{
+
+nao.classList.add("selected");
+sim.classList.remove("selected");
+
+nao.disabled=false;
+sim.disabled=true;
+
+obs.classList.add("show");
+txt.focus();
+
+}
+
+}
+
+atualizarResumo();
+
+}
+
+function atualizarResumo(){
+
+let sim=0;
+let nao=0;
+
+Object.values(respostas).forEach(r=>{
+if(r==="SIM") sim++;
+if(r==="NAO") nao++;
+});
+
+document.getElementById("simCount").textContent=sim;
+document.getElementById("naoCount").textContent=nao;
+
+}
+
+function marcarTodos(){
+
+categorias.forEach((categoria,ci)=>{
+categoria.itens.forEach((item,ii)=>{
+
+const id=ci+"-"+ii;
+
+respostas[id]="SIM";
+
+document.getElementById("sim-"+id).classList.add("selected");
+document.getElementById("nao-"+id).classList.remove("selected");
+
+document.getElementById("sim-"+id).disabled=false;
+document.getElementById("nao-"+id).disabled=true;
+
+document.getElementById("obs-"+id).classList.remove("show");
+
+});
+
+});
+
+atualizarResumo();
+
+}
+
+function limpar(){
+
+if(!confirm("Deseja realmente limpar todo o checklist?")) return;
+
+respostas={};
+
+document.querySelectorAll(".sim,.nao").forEach(btn=>{
+btn.classList.remove("selected");
+btn.disabled=false;
+});
+
+document.querySelectorAll(".obs").forEach(o=>{
+o.classList.remove("show");
+});
+
+document.querySelectorAll("textarea").forEach(t=>{
+t.value="";
+});
+
+atualizarResumo();
+
+}
+
+function imprimir(){
+
+let faltando=[];
+
+Object.keys(respostas).forEach(id=>{
+
+if(respostas[id]==="NAO"){
+
+const txt=document.getElementById("txt-"+id);
+
+if(!txt.value.trim()){
+faltando.push(id);
+}
+
+}
+
+});
+
+if(faltando.length>0){
+
+alert("Preencha a observação dos itens marcados como NÃO.");
+return;
+
+}
+
+window.print();
+
+}
+
+function atualizarDataHora(){
+
+const agora=new Date();
+
+document.getElementById("dataHora").textContent=
+agora.toLocaleDateString("pt-BR")+" — "+
+agora.toLocaleTimeString("pt-BR");
+
+}
+
+document.getElementById("placa").value=
+localStorage.getItem("placaAmbulancia")||"";
+
+document.getElementById("responsavel").value=
+localStorage.getItem("responsavelAmbulancia")||"";
+
+document.getElementById("placa").addEventListener("input",e=>{
+localStorage.setItem("placaAmbulancia",e.target.value);
+});
+
+document.getElementById("responsavel").addEventListener("input",e=>{
+localStorage.setItem("responsavelAmbulancia",e.target.value);
+});
+
+criarChecklist();
+atualizarDataHora();
+
+setInterval(atualizarDataHora,1000);
+
 </script>
+
 </body>
 </html>

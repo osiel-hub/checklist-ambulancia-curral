@@ -67,6 +67,21 @@ body.app-bloqueado {
     transform: translateY(-4px);
 }
 
+
+/* SOMENTE OCULTA "NOTA OFICIAL" DA IMAGEM ATUAL */
+
+.brasao-oficial::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    top: 107px;
+    height: 15px;
+    background: #eeeeee;
+    z-index: 2;
+}
+
+
 .header h1 {
     margin: 7px 0 4px;
     font-size: 24px;
@@ -545,6 +560,11 @@ textarea.obs-geral {
         height: 130px;
     }
 
+    .brasao-oficial::after {
+        top: 93px;
+        height: 14px;
+    }
+
     .info-grid,
     .oxygen-grid,
     .actions,
@@ -677,7 +697,6 @@ textarea.obs-geral {
 
     <div class="placas-escolha">
 
-
         <div class="placa-option">
 
             <input
@@ -715,12 +734,10 @@ textarea.obs-geral {
 
         </div>
 
-
     </div>
 
 
     <div class="info-grid">
-
 
         <div>
 
@@ -728,7 +745,6 @@ textarea.obs-geral {
                 ENFERMEIRO
                 <span class="required">*</span>
             </label>
-
 
             <input
                 type="text"
@@ -746,7 +762,6 @@ textarea.obs-geral {
                 <span class="required">*</span>
             </label>
 
-
             <input
                 type="text"
                 id="coren"
@@ -754,7 +769,6 @@ textarea.obs-geral {
             >
 
         </div>
-
 
     </div>
 
@@ -1724,11 +1738,10 @@ function obterPlaca() {
 
 
 /* =====================================================
-   VALIDAÇÃO
+   VALIDAÇÃO COMPLETA PARA PDF
 ===================================================== */
 
 function validarFormulario() {
-
 
     if (
         aplicativoFinalizado
@@ -1738,11 +1751,14 @@ function validarFormulario() {
             'CHECAGEM CONCLUÍDA. O aplicativo está bloqueado. Feche a tela e abra novamente o aplicativo para uma nova checagem.'
         );
 
-
         return false;
 
     }
 
+
+    /* -----------------------------------------
+       PLACA
+    ----------------------------------------- */
 
     const placa =
         obterPlaca();
@@ -1767,19 +1783,14 @@ function validarFormulario() {
     }
 
 
+    /* -----------------------------------------
+       ENFERMEIRO
+    ----------------------------------------- */
+
     const enfermeiro =
         document
         .getElementById(
             'enfermeiro'
-        )
-        .value
-        .trim();
-
-
-    const coren =
-        document
-        .getElementById(
-            'coren'
         )
         .value
         .trim();
@@ -1831,6 +1842,19 @@ function validarFormulario() {
     }
 
 
+    /* -----------------------------------------
+       COREN
+    ----------------------------------------- */
+
+    const coren =
+        document
+        .getElementById(
+            'coren'
+        )
+        .value
+        .trim();
+
+
     if (!coren) {
 
         alert(
@@ -1850,22 +1874,150 @@ function validarFormulario() {
     }
 
 
+    /* -----------------------------------------
+       MATERIAIS
+    ----------------------------------------- */
+
+    const primeiroNaoMarcado =
+        Array.from(
+            checkboxes
+        ).find(
+            checkbox =>
+                !checkbox.checked
+        );
+
+
     if (
-        !todosItensMarcados()
+        primeiroNaoMarcado
     ) {
 
         alert(
-            'Não é possível concluir a checagem enquanto houver itens sem marcação.'
+            'Não é possível salvar o PDF enquanto houver materiais sem marcação. Marque todos os itens.'
         );
 
 
         atualizarPendencias();
 
 
+        primeiroNaoMarcado.focus();
+
+
+        primeiroNaoMarcado.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+
+
         return false;
 
     }
 
+
+    /* -----------------------------------------
+       TORPEDO — AR COMPRIMIDO
+    ----------------------------------------- */
+
+    const arComprimido =
+        document
+        .getElementById(
+            'arComprimido'
+        );
+
+
+    if (
+        arComprimido.value.trim() === ''
+    ) {
+
+        alert(
+            'Informe a quantidade em litros do AR COMPRIMIDO.'
+        );
+
+
+        arComprimido.focus();
+
+
+        arComprimido.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+
+
+        return false;
+
+    }
+
+
+    /* -----------------------------------------
+       TORPEDO — OXIGÊNIO
+    ----------------------------------------- */
+
+    const oxigenio =
+        document
+        .getElementById(
+            'oxigenio'
+        );
+
+
+    if (
+        oxigenio.value.trim() === ''
+    ) {
+
+        alert(
+            'Informe a quantidade em litros do O₂ — OXIGÊNIO.'
+        );
+
+
+        oxigenio.focus();
+
+
+        oxigenio.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+
+
+        return false;
+
+    }
+
+
+    /* -----------------------------------------
+       TORPEDO MÓVEL
+    ----------------------------------------- */
+
+    const torpedoMovel =
+        document
+        .getElementById(
+            'torpedoMovel'
+        );
+
+
+    if (
+        torpedoMovel.value.trim() === ''
+    ) {
+
+        alert(
+            'Informe a quantidade em litros do TORPEDO MÓVEL DE O₂.'
+        );
+
+
+        torpedoMovel.focus();
+
+
+        torpedoMovel.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+
+
+        return false;
+
+    }
+
+
+    /* -----------------------------------------
+       TUDO PREENCHIDO
+    ----------------------------------------- */
 
     return true;
 
@@ -1936,7 +2088,6 @@ function finalizarAplicativo() {
 
 function baixarPDF() {
 
-
     if (
         !validarFormulario()
     ) {
@@ -1945,9 +2096,8 @@ function baixarPDF() {
 
 
     /*
-       Abre a tela de impressão.
-       O usuário pode escolher:
-       "Salvar como PDF".
+       Somente chega aqui quando
+       TODOS os campos foram preenchidos.
     */
 
     window.print();
@@ -1976,18 +2126,10 @@ window.addEventListener(
 
 
 /* =====================================================
-   NOVA CHECAGEM / CHECAGEM FINALIZADA
+   CHECAGEM FINALIZADA
 ===================================================== */
 
 function novaChecagem() {
-
-    /*
-       Esta função NÃO inicia mais uma
-       checagem depois da conclusão.
-
-       O usuário deverá fechar a tela/aba
-       e abrir novamente o aplicativo.
-    */
 
     if (
         aplicativoFinalizado
@@ -2024,7 +2166,6 @@ function novaChecagem() {
 ===================================================== */
 
 function limparFormulario() {
-
 
     document
         .getElementById(
@@ -2102,11 +2243,6 @@ function limparFormulario() {
 
 atualizarPendencias();
 
-
-/*
-   Se a sessão já estiver finalizada,
-   mantém tudo bloqueado.
-*/
 
 if (
     sessionStorage.getItem(
